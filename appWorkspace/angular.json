@@ -94,6 +94,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "appWorkspace:build:production",
+            "firebaseProject": "socialraptor-3bbcd",
+            "firebaseHostingSite": "socialraptor-3bbcd"
+          }
         }
       }
     }
