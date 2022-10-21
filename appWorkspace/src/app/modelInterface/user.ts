@@ -1,6 +1,6 @@
 import {SexeEnum} from "../enum/SexeEnum";
 
-export class User {
+export interface User {
 
   name: string | undefined;
 
@@ -10,7 +10,7 @@ export class User {
 
   password: string | undefined;
 
-  age: number = 0;
+  age: number;
 
   dateOfbirth: Date | undefined;
 

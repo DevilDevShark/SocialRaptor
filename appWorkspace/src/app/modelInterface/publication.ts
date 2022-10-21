@@ -1,4 +1,4 @@
-export class Publication {
+export interface Publication {
   name: string | undefined;
   description: string | undefined;
   date: Date | undefined;
