@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -20,8 +19,13 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-import { LoginModule } from "./login/login.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputFieldComponent } from "./utils/input-field/input-field.component";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatInputModule } from "@angular/material/input";
+import { RouterModule } from "@angular/router";
+import { routes } from "./utils/routes/route";
 
 @NgModule({
   declarations: [
@@ -29,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProfileComponent,
     ChatComponent,
     ChatListComponent,
+    InputFieldComponent,
     SearchUserComponent,
     MenuComponent,
     NewsComponent
@@ -46,11 +51,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     providePerformance(() => getPerformance()),
     provideRemoteConfig(() => getRemoteConfig()),
     provideStorage(() => getStorage()),
-    LoginModule,
-    BrowserAnimationsModule
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [
-    ScreenTrackingService,UserTrackingService
+    ScreenTrackingService, UserTrackingService
+  ],
+  exports: [
+    InputFieldComponent
   ],
   bootstrap: [AppComponent]
 })
