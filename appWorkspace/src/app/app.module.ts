@@ -27,6 +27,7 @@ import { MatInputModule } from "@angular/material/input";
 import { RouterModule } from "@angular/router";
 import { routes } from "./utils/routes/route";
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { LoginModule } from "./login/login.module";
 
 @NgModule({
   declarations: [
