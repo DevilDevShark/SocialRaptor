@@ -2,12 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ChatComponent } from './chat/chat.component';
-import { ChatListComponent } from './chat-list/chat-list.component';
-import { SearchUserComponent } from './search-user/search-user.component';
-import { MenuComponent } from './menu/menu.component';
-import { NewsComponent } from './news/news.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
@@ -20,28 +14,19 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InputFieldComponent } from "./utils/input-field/input-field.component";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { ReactiveFormsModule } from "@angular/forms";
-import { MatInputModule } from "@angular/material/input";
-import { RouterModule } from "@angular/router";
-import { routes } from "./utils/routes/route";
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { LoginModule } from "./login/login.module";
+import { SharedModule } from "./shared/shared.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ProfileComponent,
-    ChatComponent,
-    ChatListComponent,
-    InputFieldComponent,
-    SearchUserComponent,
-    MenuComponent,
-    NewsComponent
+    AppComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
@@ -53,11 +38,6 @@ import { LoginModule } from "./login/login.module";
     providePerformance(() => getPerformance()),
     provideRemoteConfig(() => getRemoteConfig()),
     provideStorage(() => getStorage()),
-    RouterModule.forRoot(routes),
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
@@ -69,7 +49,6 @@ import { LoginModule } from "./login/login.module";
     ScreenTrackingService, UserTrackingService
   ],
   exports: [
-    InputFieldComponent
   ],
   bootstrap: [AppComponent]
 })
