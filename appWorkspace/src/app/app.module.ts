@@ -26,6 +26,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { RouterModule } from "@angular/router";
 import { routes } from "./utils/routes/route";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { LoginModule } from "./login/login.module";
 
 @NgModule({
   declarations: [
@@ -55,7 +57,13 @@ import { routes } from "./utils/routes/route";
     BrowserAnimationsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     ScreenTrackingService, UserTrackingService
