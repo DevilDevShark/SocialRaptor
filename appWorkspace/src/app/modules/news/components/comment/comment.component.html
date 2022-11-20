@@ -1,0 +1,34 @@
+<div >
+    <div class="backButton">
+        <button mat-raised-button (click)="backWithNavigation()"> Retour </button>
+    </div>
+
+
+
+<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
+<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
+
+<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
+
+<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
+
+<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
+
+<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
+
+<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
+
+<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
+
+<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
+
+<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
+<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
+
+<ng-container *ngIf="publicationInitial?.comment?.length === 0">
+    <span> No comment</span>
+</ng-container>
+<div *ngFor="let comment of publicationInitial?.comment">
+    <app-news [publication]="comment" [isComment]="true"></app-news>
+</div>
+</div>

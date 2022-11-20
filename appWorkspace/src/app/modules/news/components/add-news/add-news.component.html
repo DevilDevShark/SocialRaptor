@@ -1,0 +1,10 @@
+<mat-card class="mat-card-customize">
+    <mat-form-field class="howNewContainer" appearance="legacy">
+        <textarea matInput
+                  placeholder="Une pensée pour le Raptor ?" [formControl]="descriptionCtrl"></textarea>
+    </mat-form-field>
+
+    <button [disabled]="!activeSendBtn()" (click)="send()">
+        <mat-icon>send</mat-icon>
+    </button>
+</mat-card>

@@ -5,15 +5,16 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
+import {BackButtonDirective} from "./directives/backButton.directive";
 
 const matModules= [ MatCardModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatDividerModule ];
 
 const components= [ InputFieldComponent ];
 
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, BackButtonDirective],
   imports: [...matModules],
-  exports: [...matModules, ...components]
+  exports: [...matModules, ...components, BackButtonDirective]
 })
 
 export class SharedModule {}

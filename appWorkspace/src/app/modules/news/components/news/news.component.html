@@ -1,0 +1,17 @@
+<mat-card class="mat-card-customize">
+    <div class="row d-block">
+        <!-- image profile -->
+        <!-- <img [src]="publication.user.imgProfil"> -->
+        <span class="justify-content-start overflow-hidden fw-bold"> {{ publication?.userName }} </span>
+        <span class="justify-content-end dayLabel"> {{ getNbDayBefore() }}j </span>
+    </div>
+    <br>
+    <span> {{ publication?.text }} </span>
+    <!-- image here if present -->
+    <img *ngIf="!!publication.imgUrl" [src]="publication.imgUrl"/>
+    <mat-card-actions *ngIf="!isComment">
+        <button mat-button (click)="addLike(publication)"><mat-icon>favorite_border</mat-icon> {{ publication.like?.length }}</button>
+        <button mat-button [routerLink]="publication.id"><mat-icon>comment</mat-icon> {{ publication.comment?.length }} </button>
+    </mat-card-actions>
+
+</mat-card>

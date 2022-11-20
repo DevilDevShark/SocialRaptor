@@ -1,0 +1,18 @@
+<!-- span>
+   en fonction d'un filtre passez en [route], chargez une liste specifique
+    [routerLink]="['/detail', hero.id]"
+    par default on charge le news general,
+    si on est sur une page user par defaut on charge que ses publications
+    -> lazy loading
+    si on est sur user et onglet "mentions j'aime" on charge avec un param supplementaire
+</span> -->
+<ng-container>
+    <mat-card class="mat-card-customize mat-card-customize-header">
+        <h2>Acceuil de la commu</h2>
+    </mat-card>
+    <app-add-news></app-add-news>
+
+    <div *ngFor="let p of publication" swScrollPosition="sync-loading">
+        <app-news [publication]="p"></app-news>
+    </div>
+</ng-container>

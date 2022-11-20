@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
 html, body { height: 100%; background: linear-gradient(blue, pink);}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  width: 900px;
+  margin: auto; // for center the body
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-card-customize {
+  border-radius: unset !important;
+}
