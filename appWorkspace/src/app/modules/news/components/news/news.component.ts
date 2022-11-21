@@ -1,8 +1,7 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {Publication} from "../../../../core/models/publication";
-import {NewsService} from "../../services/news.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { Publication } from "../../../../core/models/publication";
+import { NewsService } from "../../services/news.service";
 import * as firebase from "firebase/firestore";
-import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-news[publication]',
@@ -16,13 +15,21 @@ export class NewsComponent implements OnInit {
     @Input() publication: Publication = new Publication();
     @Input() isComment: boolean = false;
 
+    connectedUserAlreadyLikeThePost: boolean | null= null;
+
     // endregion
 
     constructor(private newsService: NewsService) {
     }
 
     ngOnInit(): void {
-        console.log("News ?", this.publication);
+
+        // Get the index of the userConnected on the list
+        let indexOfUserConnected = this.publication.like.indexOf('sandra');
+
+        // If the user connected have already like the publication we removed the like
+        this.connectedUserAlreadyLikeThePost = indexOfUserConnected !== -1;
+        //console.log('pub ', this.publication);
     }
 
     /**
@@ -41,7 +48,8 @@ export class NewsComponent implements OnInit {
 
         // If the user connected have already like the publication we removed the like
         indexOfUserConnected !== -1 ? publicationClicked.like.splice(indexOfUserConnected, 1):  publicationClicked.like?.push('sandra');
-        this.newsService.updatePublication(publicationClicked).then(r => console.log(r));
+
+        this.newsService.updatePublication(publicationClicked).then(() => this.connectedUserAlreadyLikeThePost = !this.connectedUserAlreadyLikeThePost);
     }
 
 }

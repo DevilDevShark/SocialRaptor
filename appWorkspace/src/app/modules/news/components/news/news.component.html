@@ -1,16 +1,30 @@
 <mat-card class="mat-card-customize">
-    <div class="row d-block">
+    <div class="row">
+    <div class="col-2 fit-content">
         <!-- image profile -->
-        <!-- <img [src]="publication.user.imgProfil"> -->
-        <span class="justify-content-start overflow-hidden fw-bold"> {{ publication?.userName }} </span>
-        <span class="justify-content-end dayLabel"> {{ getNbDayBefore() }}j </span>
+        <div class="profile-dot">
+            <figure style="background-image: url(https://i.stack.imgur.com/u20P2.jpg)"></figure>
+            <figcaption>BM</figcaption>
+        </div>
     </div>
-    <br>
-    <span> {{ publication?.text }} </span>
-    <!-- image here if present -->
-    <img *ngIf="!!publication.imgUrl" [src]="publication.imgUrl"/>
-    <mat-card-actions *ngIf="!isComment">
-        <button mat-button (click)="addLike(publication)"><mat-icon>favorite_border</mat-icon> {{ publication.like?.length }}</button>
+
+    <div class="col-9">
+        <div class="row d-block justify-content-start">
+            <span class="justify-content-start overflow-hidden fw-bold"> {{ publication?.userName }} </span>
+            <span class="justify-content-end dayLabel"> {{ getNbDayBefore() }}j </span>
+        </div>
+        <br>
+        <span> {{ publication?.text }} </span>
+        <!-- image here if present -->
+        <img *ngIf="!!publication.imgUrl" [src]="publication.imgUrl"/>
+    </div>
+    <!-- -->
+    </div>
+    <mat-card-actions *ngIf="!isComment" class="justify-content-around d-flex">
+        <button mat-button (click)="addLike(publication)">
+            <mat-icon *ngIf="!connectedUserAlreadyLikeThePost">favorite_border</mat-icon>
+            <mat-icon *ngIf="connectedUserAlreadyLikeThePost">favorite</mat-icon>
+            {{ publication.like?.length }}</button>
         <button mat-button [routerLink]="publication.id"><mat-icon>comment</mat-icon> {{ publication.comment?.length }} </button>
     </mat-card-actions>
 

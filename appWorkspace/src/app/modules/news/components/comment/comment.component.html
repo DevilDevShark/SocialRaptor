@@ -1,34 +1,18 @@
-<div >
-    <div class="backButton">
-        <button mat-raised-button (click)="backWithNavigation()"> Retour </button>
-    </div>
-
-
-
-<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
-<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
-
-<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
-
-<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
-
-<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
-
-<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
-
-<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
-
-<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
-
-<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
-
-<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
-<app-add-news [orginalPublication]="publicationInitial"></app-add-news>
-
-<ng-container *ngIf="publicationInitial?.comment?.length === 0">
-    <span> No comment</span>
-</ng-container>
-<div *ngFor="let comment of publicationInitial?.comment">
-    <app-news [publication]="comment" [isComment]="true"></app-news>
+<div class="divBackButton">
+        <button mat-button (click)="backWithNavigation()" class="backButton">
+            <mat-icon class="me-3">keyboard_backspace</mat-icon>Commentaires
+        </button>
 </div>
+
+<div class="commentViewContainer" *ngIf="pub$ | async as p">
+    <app-news [publication]="p"></app-news>
+    <app-add-news [orginalPublication]="p"></app-add-news>
+
+    <ng-container *ngIf="p?.comment?.length === 0">
+        <span> No comment</span>
+    </ng-container>
+
+    <div *ngFor="let comment of p?.comment">
+        <app-news [publication]="comment" [isComment]="true"></app-news>
+    </div>
 </div>
