@@ -5,6 +5,8 @@ import { Publication } from "../../../core/models/publication";
 import { GenericFirestoreService } from "../../../core/service/generic-firestore.service";
 import { FIREBASE_COLLECTION_PATHS } from "../constants/constants";
 import {Observable} from "rxjs";
+import {UploadMetadata, UploadResult} from "@angular/fire/storage";
+import {GenericStorageService} from "../../../core/service/generic-storage.service";
 
 @Injectable({
     providedIn: "root",
@@ -14,6 +16,7 @@ export class NewsService {
     publicationsCollection: CollectionReference<DocumentData>;
 
     public constructor(private genericFirestoreService: GenericFirestoreService,
+                       private genericStorageService: GenericStorageService,
                        private firestore: Firestore) {
         this.publicationsCollection = collection(this.firestore, FIREBASE_COLLECTION_PATHS.PUBLICATION);
     }
@@ -34,4 +37,14 @@ export class NewsService {
     public updatePublication(publication: Publication) {
         return this.genericFirestoreService.update<Publication>('publications', publication );
     }
+
+    // image function
+
+    public uploadImageNews(fileName: string, file: File): Promise<UploadResult> {
+        const metadata: UploadMetadata = {};
+
+        return this.genericStorageService.uploadFile(file, `news/${fileName}`, metadata);
+    }
+
+    // endregion
 }

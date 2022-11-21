@@ -13,8 +13,12 @@ export class AddNewsComponent implements OnInit {
 
     // region Attributes
 
-    descriptionCtrl: FormControl = new FormControl('', Validators.required);
     @Input() orginalPublication?: Publication;
+
+    descriptionCtrl: FormControl = new FormControl('', Validators.required);
+    imgCtrl: FormControl = new FormControl('', Validators.required);
+    public url: any;
+    imageSrc: string = '';
 
     // endregion
 
@@ -28,8 +32,20 @@ export class AddNewsComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    readURL(event: any): void {
+        if (event.target.files && event.target.files[0]) {
+            const file = event.target.files[0];
+
+            const reader = new FileReader();
+            reader.onload = e => this.imgCtrl.setValue(reader.result);
+
+            this.imageSrc = file.name;
+            reader.readAsDataURL(file);
+        }
+    }
+
     activeSendBtn(): boolean {
-        return this.descriptionCtrl.valid;
+        return this.descriptionCtrl.valid || this.imgCtrl.valid;
     }
 
     send() {
@@ -40,7 +56,7 @@ export class AddNewsComponent implements OnInit {
             date: createAt,
             text: this.descriptionCtrl.value,
             like: [],
-            imgUrl: null,
+            imgUrl: this.imgCtrl.value,
             comment: []
         };
         // TODO user devra etre stocker et utilser
@@ -52,7 +68,7 @@ export class AddNewsComponent implements OnInit {
         {
             this.newsService.addPublication(newP).then();
         }
+        if(!!this.imgCtrl.value) this.newsService.uploadImageNews(this.imageSrc, this.imgCtrl.value).then();
 
     }
-
 }
