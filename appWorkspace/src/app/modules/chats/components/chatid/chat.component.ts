@@ -36,11 +36,14 @@ export class ChatComponent implements OnInit {
 
   sendMessage() {
     const message = this.messageCtrl.value;
+    
     const a: Chat   = { 
-      fromTo: (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random())),
-      time: Timestamp.now(),
-      message: message
+      fromTo:   (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random())),
+      time:     Timestamp.now(),
+      message:  message,
+      isRead:   false
     };
+
     this.chats?.chat.push(a);
     this.chatService.updateChats(this.chats)
 

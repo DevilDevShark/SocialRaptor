@@ -2,6 +2,7 @@ import { Timestamp } from "firebase/firestore";
 
 export class Chats {
     chat:       Chat[]      = [];
+    userID:     string[]    = [];
     id:         string      = "";
     lastUpdate: Timestamp   = Timestamp.now();
 }

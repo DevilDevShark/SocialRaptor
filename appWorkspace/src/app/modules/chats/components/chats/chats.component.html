@@ -1,7 +1,9 @@
 <h1>chats works!</h1>
+<button mat-raised-button color="primary" (click)="createChatId()">Crees un chat</button>
+
 <div *ngFor="let chat of chats">
     <h4>{{chat.id}}</h4>
     <a href="/chat/{{chat.id}}">
-        <button mat-raised-button color="primary" (click)="chatId()">Chatter</button>
+        <button mat-raised-button color="primary" (click)="inutile()">Chatter</button>
     </a>
 </div>

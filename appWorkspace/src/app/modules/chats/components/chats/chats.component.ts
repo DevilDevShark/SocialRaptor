@@ -20,13 +20,7 @@ export class ChatsComponent implements OnInit {
   
   ngOnInit(): void 
   {
-    const a: Chat   = {isRead:false, fromTo: (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random())), time: Timestamp.now(), message: "wololo :" + (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random()))}
-    const b: Chats  = {
-        chat: [a, a, a, a],
-        lastUpdate: Timestamp.now(),
-        id: ''
-    }
-    this.chatService.addChats(b);
+
 
 
     this.chatService.getAllChats().subscribe((data:Chats[]) => this.chats = data)
@@ -34,7 +28,25 @@ export class ChatsComponent implements OnInit {
 
   }
 
-  chatId() {}
+  inutile() {}
+
+  createChatId() {
+    const a: Chat   = {
+      isRead:false,
+      fromTo: (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random())),
+      time: Timestamp.now(),
+      message: "wololo :" + (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random()))
+    };
+
+    const b: Chats  = {
+        chat: [a, a, a, a],
+        lastUpdate: Timestamp.now(),
+        id: '',
+        userID:[]
+    };
+
+    this.chatService.addChats(b);
+  }
 
 
 
