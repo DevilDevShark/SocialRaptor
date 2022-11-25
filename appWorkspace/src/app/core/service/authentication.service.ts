@@ -11,6 +11,8 @@ import {
   signOut
 } from "@angular/fire/auth";
 import {EMPTY, Observable, of} from "rxjs";
+import {GenericFirestoreService} from "./generic-firestore.service";
+import {AppUser} from "../models/appUser";
 
 
 @Injectable({
@@ -19,10 +21,11 @@ import {EMPTY, Observable, of} from "rxjs";
 export class AuthenticationService {
 
   public user: Observable<User | null> = EMPTY;
+  public userInfo: AppUser | null = null;
 
   // region constructor
 
-  constructor(private readonly auth: Auth) {
+  constructor(private readonly auth: Auth, public gFS: GenericFirestoreService) {
     if (this.auth) {
       this.user = authState(this.auth);
       onAuthStateChanged(
@@ -39,6 +42,15 @@ export class AuthenticationService {
   }
 
   // endregion
+
+  public getUserUID() {
+    this.user.subscribe(event => {
+      if(event != null) {
+        let uI: Observable<AppUser> = this.gFS.fetchById("user", event.uid);
+        uI.subscribe((event: AppUser) => this.userInfo = event);
+      }
+    });
+  }
 
   public async signUp(email: string, password: string, firstname: string= '', lastname: string = ''): Promise<UserCredential | null> {
     try {

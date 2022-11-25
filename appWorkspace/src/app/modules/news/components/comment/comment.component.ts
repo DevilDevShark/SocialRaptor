@@ -4,6 +4,7 @@ import {NavigationService} from "../../../../shared/directives/navigation.servic
 import {ActivatedRoute} from "@angular/router";
 import {NewsService} from "../../services/news.service";
 import {Observable} from "rxjs";
+import {AuthenticationService} from "../../../../core/service/authentication.service";
 
 @Component({
   selector: 'app-comment',
@@ -15,7 +16,6 @@ export class CommentComponent implements OnInit {
 
   // region attributes
 
-  publicationInitial: Publication = new Publication();
   pub$: Observable<Publication> | null = null ;
 
   // endregion
@@ -25,7 +25,7 @@ export class CommentComponent implements OnInit {
   constructor(public navigation: NavigationService,
               private route: ActivatedRoute,
               private cd: ChangeDetectorRef,
-              private newsService: NewsService) { }
+              private newsService: NewsService, private a: AuthenticationService) { }
 
   // endregion
 
@@ -33,11 +33,6 @@ export class CommentComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.pub$ = this.newsService.getNewById(params['id']);
-      /*this.newsService.getNewById(params['id']).subscribe( data => {
-        console.log("data", data);
-        this.publicationInitial = data;
-        this.cd.detectChanges();
-      });*/
     });
   }
 
