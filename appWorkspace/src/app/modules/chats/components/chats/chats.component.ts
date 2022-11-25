@@ -20,7 +20,7 @@ export class ChatsComponent implements OnInit {
   
   ngOnInit(): void 
   {
-    const a: Chat   = { fromTo: (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random())), time: Timestamp.now(), message: "wololo :" + (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random()))}
+    const a: Chat   = {isRead:false, fromTo: (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random())), time: Timestamp.now(), message: "wololo :" + (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random()))}
     const b: Chats  = {
         chat: [a, a, a, a],
         lastUpdate: Timestamp.now(),
