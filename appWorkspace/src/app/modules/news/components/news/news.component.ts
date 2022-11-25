@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Publication } from "../../../../core/models/publication";
 import { NewsService } from "../../services/news.service";
-import * as firebase from "firebase/firestore";
 
 @Component({
     selector: 'app-news[publication]',
@@ -35,11 +34,19 @@ export class NewsComponent implements OnInit {
     /**
      * Get the number of days before today
      */
-    getNbDayBefore(): number {
+    getNbDayBefore(): string {
 
-        let todayDate = firebase.Timestamp.now();
-        return 4;
-        //return (todayDate.toDate().getTime() - this.publication?.date?.toDate().getTime()) / (1000 * 3600 * 24);
+        let currentDate = new Date(); // today's date
+        let creationDate = this.publication.date?.toDate().getTime();
+
+        let deltaInMinutes = Math.round((currentDate.getTime() -  creationDate) /  60 / 1000);
+        let deltaInHours =  Math.round(deltaInMinutes / 60);
+        let deltaInDays =  Math.round(deltaInHours / 24);
+
+        return deltaInDays > 0 ? deltaInDays + 'j':
+            deltaInHours < 25 && deltaInHours > 0 ? deltaInHours + 'h':
+                deltaInMinutes > 0 && deltaInMinutes < 60 ? deltaInMinutes + "min":
+                    '0s';
     }
 
     addLike(publicationClicked: Publication) {

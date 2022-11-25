@@ -1,10 +1,10 @@
-import firebase from "firebase/compat";
-import Timestamp = firebase.firestore.Timestamp;
+import * as f from "firebase/firestore";
+import Timestamp = f.Timestamp;
 
 export class Publication {
     id: string = '';
     userName?: string;
-    date?: Timestamp;
+    date: Timestamp = f.Timestamp.now();
     text?: string;
     like: string[] = [];
     comment: Publication[] | null = null;
