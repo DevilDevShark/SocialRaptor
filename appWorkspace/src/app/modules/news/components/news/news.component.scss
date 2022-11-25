@@ -1,0 +1,49 @@
+/*.divProfile {
+  border: 1px solid black;
+  border-radius: 9999px;
+  width: 10px;
+  height: 20px;
+}*/
+
+.profile-dot {
+  position: relative;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+  background-color: lightgray;
+  border-radius: 50%;
+  border: gray 2px solid;
+  overflow: hidden;
+}
+
+.profile-dot figure {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.profile-dot figcaption {
+  font-weight: 700;
+  color: #fff;
+  font-style: normal;
+  font-size: 120%;
+}
+
+.dayLabel {
+  color: lightgray !important;
+}

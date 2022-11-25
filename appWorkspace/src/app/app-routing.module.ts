@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { redirectUnauthorizedTo, canActivate, redirectLoggedInTo } from "@angular/fire/auth-guard";
 import { LoginComponent } from "./modules/login/components/login.component";
-import {NewsComponent} from "./modules/news/components/news.component";
+import {NewsLayoutComponent} from "./modules/news/components/news-layout/news-layout.component";
+import {CommentComponent} from "./modules/news/components/comment/comment.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([""]);
 const redirectLoggedInToUsers = () => redirectLoggedInTo(["/news"]);
@@ -15,8 +16,14 @@ const routes: Routes = [
     ...canActivate(redirectLoggedInToUsers),
   },
   {
-    component: NewsComponent,
+    component: NewsLayoutComponent,
     path: "news",
+    loadChildren: () => import("./modules/news/news.module").then((module) => module.NewsModule),
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: "news/:id",
+    component: CommentComponent,
     loadChildren: () => import("./modules/news/news.module").then((module) => module.NewsModule),
     ...canActivate(redirectUnauthorizedToLogin),
   },
@@ -27,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

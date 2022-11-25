@@ -16,7 +16,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SharedModule } from "./shared/shared.module";
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
+import {NavigationService} from "./shared/directives/navigation.service";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import {HttpClientModule} from "@angular/common/http";
     })
   ],
   providers: [
-    ScreenTrackingService, UserTrackingService
+    ScreenTrackingService, UserTrackingService, NavigationService
   ],
   exports: [
   ],
