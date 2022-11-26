@@ -3,7 +3,9 @@
     "target": "appWorkspace",
     "public": "dist/app-workspace",
     "ignore": [
-      "**/.*"
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
     ],
     "headers": [
       {

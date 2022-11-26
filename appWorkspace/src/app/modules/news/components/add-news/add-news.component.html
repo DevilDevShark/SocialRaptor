@@ -15,6 +15,9 @@
             <input type="file" id="file" (change)="readURL($event)" style="display: none;"/>
         </div>
 
+        <button mat-button><mat-icon>send</mat-icon></button>
+        <app-native-camera></app-native-camera>
+
         <div class="col d-flex justify-content-end">
             <button [disabled]="!activeSendBtn()" (click)="send()">
                 <mat-icon>send</mat-icon>
