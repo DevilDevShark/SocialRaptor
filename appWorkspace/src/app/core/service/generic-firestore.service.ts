@@ -65,6 +65,17 @@ export class GenericFirestoreService {
         return collectionData(request, { idField: "id" }) as Observable<T[]>;
     }
 
+    public fetchByArrayProperty<T>(
+        collection: CollectionReference<DocumentData>,
+        propertyName: string,
+        propertyValue: string[],
+        maxResult: number = 10
+    ): Observable<T[]> {
+        const request = query(collection, where(propertyName, "in", propertyValue), limit(maxResult));
+
+        return collectionData(request, { idField: "id" }) as Observable<T[]>;
+    }
+
     public create<T>(collection: CollectionReference<T>, object: WithFieldValue<T>): Promise<DocumentReference<T>> {
         return addDoc(collection, object);
     }

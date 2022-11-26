@@ -3,7 +3,7 @@ import Timestamp = f.Timestamp;
 
 export class AppUser {
     id: string = '';
-    userName: string = 'Anonymous';
+    userName: string = '';
     age?: number;
     creationAccountDate: Timestamp = f.Timestamp.now();
     description?: string;

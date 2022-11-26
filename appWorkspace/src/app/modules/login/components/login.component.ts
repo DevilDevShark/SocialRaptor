@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
                 let createAt = firebase.Timestamp.now()
                 let newU = {
                     id: r?.user.uid,
-                    userName: 'DIEU',
+                    userName: 'Anonymous',
                     age: 0,
                     creationAccountDate: createAt,
                     description: '',

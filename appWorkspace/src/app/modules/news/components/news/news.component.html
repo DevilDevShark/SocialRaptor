@@ -10,8 +10,22 @@
 
         <div class="col-9">
             <div class="row d-block justify-content-start">
-                <span class="justify-content-start overflow-hidden fw-bold"> {{ publication?.userName }} </span><span class="justify-content-end dayLabel"> {{ getNbDayBefore() }} </span>
+
+                <ng-container class="justify-content-star">
+                    <span class="justify-content-start overflow-hidden fw-bold"> {{ publication?.userName }} </span>
+                    <span class="justify-content-end dayLabel"> {{ getNbDayBefore() }} </span>
+                </ng-container>
+
+                <ng-container class="justify-content-end">
+                    <button *ngIf="isUserCanDeletePublication()"
+                            class="w-auto"
+                            (click)="removePublication(publication)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </ng-container>
+
             </div>
+
             <br>
             <span> {{ publication?.text }} </span>
             <!-- image here if present -->
@@ -19,11 +33,15 @@
         </div>
         <!-- -->
     </div>
+
+    <!-- Button like and comments not show for comment view -->
     <mat-card-actions *ngIf="!isComment" class="justify-content-around d-flex">
+        <!-- Button for add or remove a like -->
         <button mat-button (click)="addLike(publication)">
             <mat-icon *ngIf="!connectedUserAlreadyLikeThePost">favorite_border</mat-icon>
             <mat-icon *ngIf="connectedUserAlreadyLikeThePost">favorite</mat-icon>
             {{ publication.like?.length }}</button>
+        <!-- Button for add or view all comments -->
         <button mat-button [routerLink]="publication.id">
             <mat-icon>comment</mat-icon>
             {{ publication.comment?.length }} </button>

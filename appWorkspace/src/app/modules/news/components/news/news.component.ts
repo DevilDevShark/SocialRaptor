@@ -1,11 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import { Publication } from "../../../../core/models/publication";
 import { NewsService } from "../../services/news.service";
+import {AppUser} from "../../../../core/models/appUser";
+import {AuthenticationService} from "../../../../core/service/authentication.service";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-news[publication]',
     templateUrl: './news.component.html',
-    styleUrls: ['./news.component.scss']
+    styleUrls: ['./news.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsComponent implements OnInit {
 
@@ -15,20 +19,36 @@ export class NewsComponent implements OnInit {
     @Input() isComment: boolean = false;
 
     connectedUserAlreadyLikeThePost: boolean | null= null;
+    connectedUser: AppUser | null = null;
+
+    subscription: Subscription = new Subscription();
 
     // endregion
 
-    constructor(private newsService: NewsService) {
-    }
+    // region constructor
+
+    constructor(private newsService: NewsService,
+                private auth: AuthenticationService) {}
+
+    // endregion
 
     ngOnInit(): void {
+        this.connectedUser = this.auth.userInfo;
+        if(!!this.connectedUser)
+        {
+            // Get the index of the userConnected on the list
+            let indexOfUserConnected = this.publication.like.indexOf(this.connectedUser.userName);
 
-        // Get the index of the userConnected on the list
-        let indexOfUserConnected = this.publication.like.indexOf('sandra');
+            // If the user connected have already like the publication we removed the like
+            this.connectedUserAlreadyLikeThePost = indexOfUserConnected !== -1;
+            //console.log('pub ', this.publication);
+        }
 
-        // If the user connected have already like the publication we removed the like
-        this.connectedUserAlreadyLikeThePost = indexOfUserConnected !== -1;
-        //console.log('pub ', this.publication);
+
+    }
+
+    ngOnChange() {
+        this.connectedUser = this.auth.userInfo;
     }
 
     /**
@@ -51,12 +71,27 @@ export class NewsComponent implements OnInit {
 
     addLike(publicationClicked: Publication) {
         // Get the index of the userConnected on the list
-        let indexOfUserConnected = publicationClicked.like.indexOf('sandra');
+        let indexOfUserConnected = publicationClicked.like.indexOf(<string>this.connectedUser?.userName);
 
         // If the user connected have already like the publication we removed the like
-        indexOfUserConnected !== -1 ? publicationClicked.like.splice(indexOfUserConnected, 1):  publicationClicked.like?.push('sandra');
+        indexOfUserConnected !== -1 ? publicationClicked.like.splice(indexOfUserConnected, 1):  publicationClicked.like?.push(<string>this.connectedUser?.userName);
 
         this.newsService.updatePublication(publicationClicked).then(() => this.connectedUserAlreadyLikeThePost = !this.connectedUserAlreadyLikeThePost);
     }
 
+    /**
+     * Delete publication
+     * @param publication
+     */
+    removePublication(publication: Publication) {
+        this.newsService.deletePublication(publication).then(() => console.log('removed'));
+    }
+
+    isUserCanDeletePublication(): boolean {
+        return this.publication.userName === this.connectedUser?.userName;
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
 }
