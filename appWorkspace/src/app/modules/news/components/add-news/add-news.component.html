@@ -5,18 +5,16 @@
 
     </mat-form-field>
 
-    <img id="blah" *ngIf="!!imgCtrl.value" [src]="imgCtrl.value" style="width: 100%; height: fit-content" />
+    <img *ngIf="!!imgCtrl.value" [src]="imgCtrl.value" style="width: 100%; height: fit-content" />
 
     <div class="row">
         <div class="col image-upload justify-content-start">
             <label for="file">
-                <mat-icon class="sendImg">add_photo_alternate</mat-icon>
+                <mat-icon [matTooltip]="'Ajouter une image ou prendre une photo'"
+                          class="sendImg">add_photo_alternate</mat-icon>
             </label>
             <input type="file" id="file" (change)="readURL($event)" style="display: none;"/>
         </div>
-
-        <button mat-button><mat-icon>send</mat-icon></button>
-        <app-native-camera></app-native-camera>
 
         <div class="col d-flex justify-content-end">
             <button [disabled]="!activeSendBtn()" (click)="send()">

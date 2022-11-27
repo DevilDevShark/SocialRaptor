@@ -1,11 +1,10 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import * as firebase from "firebase/firestore";
-import {NewsService} from "../../services/news.service";
-import {FormControl, Validators} from "@angular/forms";
-import {Publication} from "../../../../core/models/publication";
-import {AppUser} from "../../../../core/models/appUser";
-import {AuthenticationService} from "../../../../core/service/authentication.service";
-import {Subscription} from "rxjs";
+import { NewsService } from "../../services/news.service";
+import { FormControl, Validators } from "@angular/forms";
+import { Publication } from "../../../../core/models/publication";
+import { AppUser } from "../../../../core/models/appUser";
+import { AuthenticationService } from "../../../../core/service/authentication.service";
 
 @Component({
     selector: 'app-add-news',
@@ -26,19 +25,16 @@ export class AddNewsComponent implements OnInit {
 
     // endregion
 
-    public url: any;
     imageSrc: string = '';
 
     currentUser: AppUser | null = null;
-
-    subscription: Subscription = new Subscription();
 
     // endregion
 
     // region constructor
 
     constructor(private newsService: NewsService,
-                private authService: AuthenticationService) {
+                private authService: AuthenticationService, private cd: ChangeDetectorRef) {
     }
 
     // endregion
@@ -51,7 +47,10 @@ export class AddNewsComponent implements OnInit {
             const file = event.target.files[0];
 
             const reader = new FileReader();
-            reader.onload = e => this.imgCtrl.setValue(reader.result);
+            reader.onload = () => {
+                this.imgCtrl.setValue(reader.result);
+                this.cd.detectChanges();
+            };
 
             this.imageSrc = file.name;
             reader.readAsDataURL(file);
