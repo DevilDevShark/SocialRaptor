@@ -1,9 +1,8 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import { Publication } from "../../../../core/models/publication";
 import { NewsService } from "../../services/news.service";
 import {AppUser} from "../../../../core/models/appUser";
 import {AuthenticationService} from "../../../../core/service/authentication.service";
-import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-news[publication]',
@@ -21,14 +20,15 @@ export class NewsComponent implements OnInit {
     connectedUserAlreadyLikeThePost: boolean | null= null;
     connectedUser: AppUser | null = null;
 
-    subscription: Subscription = new Subscription();
+    imgSrc: string = 'assets/default-img/rj.png';
 
     // endregion
 
     // region constructor
 
     constructor(private newsService: NewsService,
-                private auth: AuthenticationService) {}
+                private auth: AuthenticationService,
+                private cd: ChangeDetectorRef) {}
 
     // endregion
 
@@ -36,6 +36,11 @@ export class NewsComponent implements OnInit {
         this.connectedUser = this.auth.userInfo;
         if(!!this.connectedUser)
         {
+             if(!!this.connectedUser.imgPath) {
+                 this.imgSrc = this.connectedUser.imgPath;
+                 this.cd.detectChanges();
+             }
+
             // Get the index of the userConnected on the list
             let indexOfUserConnected = this.publication.like.indexOf(this.connectedUser.userName);
 
@@ -89,9 +94,5 @@ export class NewsComponent implements OnInit {
 
     isUserCanDeletePublication(): boolean {
         return this.publication.userName === this.connectedUser?.userName;
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
     }
 }

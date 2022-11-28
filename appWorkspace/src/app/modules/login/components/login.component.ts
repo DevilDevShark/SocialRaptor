@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl} from "@angular/forms";
 import {AuthenticationService} from "../../../core/service/authentication.service";
 import {LoginService} from "../service/login.service";
 import * as firebase from "firebase/firestore";
+import {
+    SwalConfigProfileComponent
+} from "../../../shared/utils-component/swal-config-profile/swal-config-profile.component";
 
 @Component({
     selector: 'app-login',
@@ -11,6 +14,8 @@ import * as firebase from "firebase/firestore";
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+    @ViewChild('swalConfigProfile') swalConfigProfile?: SwalConfigProfileComponent;
 
     public emailCtrl = new FormControl();
     public passwordCtrl = new FormControl();
@@ -45,10 +50,13 @@ export class LoginComponent implements OnInit {
                     friends: [],
                     followed_account_id: [],
                     publications: [],
-                    chats_id: []
+                    chats_id: [],
+                    imgPath: ''
                 };
-                this.loginService.addConnectedUser(newU, r?.user.uid).then(r => {
+                this.loginService.addConnectedUser(newU, r?.user.uid).then(() => {
                     console.log("User created");
+                    // display the config profile after the register for forced the user
+                    this.swalConfigProfile?.displaySwal();
                 });
             }
         });
