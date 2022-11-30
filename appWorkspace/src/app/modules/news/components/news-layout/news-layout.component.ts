@@ -15,7 +15,6 @@ export class NewsLayoutComponent implements OnInit {
     // region Attributes
 
     publications: Observable<Publication[]> | null = null;
-    userPublications: Publication[] | null = null;
 
     // endregion
 
@@ -42,7 +41,7 @@ export class NewsLayoutComponent implements OnInit {
                 this.publications = this.newsService.getAllPublicationByFriends(user.friends);
                 this.cd.detectChanges(); // update the view
             }
-        }, 2000);
+        }, 1000);
     }
 
     // endregion

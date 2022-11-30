@@ -1,8 +1,7 @@
 <mat-card class="mat-card-customize">
     <div class="row">
-        <div class="col-2 imgContainer">
-            <!-- image profile -->
-            <img class="imgConfig" [src]="imgSrc"/>
+        <div class="col-2 display-contents fit-content">
+            <app-img-profile-container class="display-contents" [imgSrc]="userImgProfile"></app-img-profile-container>
         </div>
 
         <div class="col-9">
@@ -11,14 +10,6 @@
                 <ng-container class="justify-content-star">
                     <span class="justify-content-start overflow-hidden fw-bold"> {{ publication?.userName }} </span>
                     <span class="justify-content-end dayLabel"> {{ getNbDayBefore() }} </span>
-                </ng-container>
-
-                <ng-container class="justify-content-end">
-                    <button *ngIf="isUserCanDeletePublication()"
-                            class="w-auto"
-                            (click)="removePublication(publication)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
                 </ng-container>
 
             </div>
@@ -42,6 +33,11 @@
         <button mat-button [routerLink]="publication.id">
             <mat-icon>comment</mat-icon>
             {{ publication.comment?.length }} </button>
+        <!-- Button for delete the publication if is he write by the current user -->
+        <button mat-button *ngIf="isUserCanDeletePublication()"
+                (click)="removePublication(publication)">
+            <mat-icon>delete</mat-icon>
+        </button>
     </mat-card-actions>
 
 </mat-card>

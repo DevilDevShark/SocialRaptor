@@ -11,11 +11,12 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { SwalConfigProfileComponent } from "./utils-component/swal-config-profile/swal-config-profile.component";
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
+import { ImgProfileContainerComponent } from './utils-component/img-profile-container/img-profile-container.component';
 
 const matModules= [ MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule,
   MatTooltipModule, MatDividerModule, ReactiveFormsModule ];
 
-const components= [ InputFieldComponent, SwalConfigProfileComponent];
+const components= [ ImgProfileContainerComponent, InputFieldComponent, SwalConfigProfileComponent];
 
 @NgModule({
   declarations: [...components, BackButtonDirective ],

@@ -20,7 +20,7 @@ export class NewsComponent implements OnInit {
     connectedUserAlreadyLikeThePost: boolean | null= null;
     connectedUser: AppUser | null = null;
 
-    imgSrc: string = 'assets/default-img/rj.png';
+    userImgProfile?: string;
 
     // endregion
 
@@ -37,7 +37,7 @@ export class NewsComponent implements OnInit {
         if(!!this.connectedUser)
         {
              if(!!this.connectedUser.imgPath) {
-                 this.imgSrc = this.connectedUser.imgPath;
+                 this.userImgProfile = this.connectedUser.imgPath;
                  this.cd.detectChanges();
              }
 
@@ -47,6 +47,7 @@ export class NewsComponent implements OnInit {
             // If the user connected have already like the publication we removed the like
             this.connectedUserAlreadyLikeThePost = indexOfUserConnected !== -1;
             //console.log('pub ', this.publication);
+            this.cd.detectChanges();
         }
 
 

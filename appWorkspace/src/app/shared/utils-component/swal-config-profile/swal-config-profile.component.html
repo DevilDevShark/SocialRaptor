@@ -8,9 +8,8 @@
         <span class="fw-bold"> Avant de rencontrer tes semblables présente toi !</span>
         <form class="h-auto">
             <div class="row">
-                <div class="col-2 imgContainer">
-                    <!-- image profile -->
-                    <img class="imgConfig" [src]="imgCtrl.value"/>
+                <div class="col-2 display-contents fit-content">
+                    <app-img-profile-container class="display-contents" [imgSrc]="imgCtrl.value"></app-img-profile-container>
                 </div>
                 <div class="col-9 fit-content">
                     <app-input-field [title]="'Pseudo'" [control]="pseudoCtrl" [classForm]="'legacy'"></app-input-field>

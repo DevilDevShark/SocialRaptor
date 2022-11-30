@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { SwalComponent } from "@sweetalert2/ngx-sweetalert2";
 import { TempAppUserService } from "../../../core/service/temp-app-user.service";
 import { AuthenticationService } from "../../../core/service/authentication.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-swal-config-profile',
@@ -33,7 +34,8 @@ export class SwalConfigProfileComponent {
 
   constructor(private tempUserService: TempAppUserService,
               private auth: AuthenticationService,
-              private cd: ChangeDetectorRef) { }
+              private cd: ChangeDetectorRef,
+              private route: Router) { }
 
   // endregion
 
@@ -49,7 +51,9 @@ export class SwalConfigProfileComponent {
           upUser.age = this.ageCtrl.value;
           upUser.description = this.descriptionCtrl.value;
           upUser.imgPath = this.imgCtrl.value;
-          this.tempUserService.updateConnectedUser(upUser).then();
+          this.tempUserService.updateConnectedUser(upUser).then(() => this.route.navigate(['/news']));
+
+
         }
       }
     });
