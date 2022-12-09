@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Timestamp } from 'firebase/firestore';
 import {AuthenticationService} from "../../../../core/service/authentication.service";
+import {AppUser} from "../../../../core/models/appUser";
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ChatComponent implements OnInit {
   public chats: Chats = new Chats;
   private routeSub?: Subscription;
   public messageCtrl = new FormControl();
+  connectedUser: AppUser | null = new AppUser();
 
   constructor(private chatService:ChatsService,
               private auth: AuthenticationService,
@@ -24,6 +26,8 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.connectedUser = this.auth.userInfo;
+    console.log(this.connectedUser);
 
     this.routeSub = this.route.params.subscribe(params => {
       console.log(params);

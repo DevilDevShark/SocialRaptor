@@ -31,13 +31,33 @@ body {
   color: lightgray !important;
 }
 
-::ng-deep .clickableContainer {
-  &hover {
-    background-color: lightgrey !important;
+.clickableContainer {
+  &:hover mat-card {
+    transform: scale(1.1);
+    transition: all .3s ease-in-out;
+    color: #ff8071 !important;
+    background-color: black;
   }
 }
 
 .generalContainer {
   width: 50% !important;
   margin: auto !important; // for center the body
+}
+
+.divBackButton {
+  height: 20px !important;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+  margin: auto;
+  position:fixed;
+}
+
+.backButton {
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
+  background-color: black;
+  color: white;
+  width: 50% !important;
 }
