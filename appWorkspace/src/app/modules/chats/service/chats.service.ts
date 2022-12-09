@@ -30,16 +30,16 @@ public getChatById(id:string): Observable<Chats[]>{
 }
 
 public addChats(chats: Chats): Promise<DocumentReference<DocumentData>> {
-    let carotte = this.genericFirestoreService.create(this.chatsCollection, chats);
-    carotte.then((kk)=>{
-        chats.id = kk.id;
+    let tmpChats = this.genericFirestoreService.create(this.chatsCollection, chats);
+    tmpChats.then((dtmp)=>{
+        chats.id = dtmp.id;
         this.updateChats(chats);
     })
-    return carotte;
+    return tmpChats;
 }
-    updateChats(chats: Chats) {
-        return this.genericFirestoreService.update(FIREBASE_COLLECTION_PATHS.CHATS,chats);
-    }
+updateChats(chats: Chats) {
+    return this.genericFirestoreService.update(FIREBASE_COLLECTION_PATHS.CHATS,chats);
+}
 
 
 
