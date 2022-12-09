@@ -12,7 +12,7 @@ const redirectLoggedInToUsers = () => redirectLoggedInTo(["/news"]);
 const routes: Routes = [
   {
     component: LoginComponent,
-    path: "",
+    path: "login",
     loadChildren: () => import("./modules/login/login.module").then((module) => module.LoginModule),
     ...canActivate(redirectLoggedInToUsers),
   },
