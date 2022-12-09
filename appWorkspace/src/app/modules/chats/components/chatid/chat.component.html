@@ -1,0 +1,13 @@
+<a href="/chats">
+    <button mat-raised-button color="primary">Retour</button>
+</a>
+<p>chat {{chats.id}} - ID works!</p>
+
+<div *ngFor="let chat of chats.chat">
+    <h4>{{chat.fromTo}} ({{chat.time.toDate() | date:'dd/MM/yyyy h:mm:ss a'}}) => {{chat.message}}</h4>
+</div>
+
+<mat-card-actions>
+    <app-input-field [title]="'Message'" [control]="messageCtrl"></app-input-field>
+    <button mat-raised-button color="primary" (click)="sendMessage()">Envoyer</button>
+</mat-card-actions>
