@@ -6,12 +6,12 @@ import { ChatsComponent } from "./components/chats/chats.component";
 import { SharedModule } from "../../shared/shared.module";
 import { CoreModule } from "../../core/core.module";
 
-const commponents: [ ChatsComponent, ChatComponent, ChatsListItemComponent ];
+const components = [ ChatsComponent, ChatComponent, ChatsListItemComponent ];
 
 @NgModule({
     declarations: [ ...components],
     exports: [ ...components ],
-    imports: [CommonModule, SharedModule]
+    imports: [ CommonModule, SharedModule ]
 })
 
 export class ChatsModule {}
