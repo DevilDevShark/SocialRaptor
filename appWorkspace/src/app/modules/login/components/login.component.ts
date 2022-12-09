@@ -1,33 +1,66 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl} from "@angular/forms";
 import {AuthenticationService} from "../../../core/service/authentication.service";
+import {LoginService} from "../service/login.service";
+import * as firebase from "firebase/firestore";
+import {
+    SwalConfigProfileComponent
+} from "../../../shared/utils-component/swal-config-profile/swal-config-profile.component";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
-  public emailCtrl = new FormControl();
-  public passwordCtrl = new FormControl();
+    @ViewChild('swalConfigProfile') swalConfigProfile?: SwalConfigProfileComponent;
 
-  constructor(public router: Router, private auth: AuthenticationService) { }
+    public emailCtrl = new FormControl();
+    public passwordCtrl = new FormControl();
 
-  ngOnInit(): void {
-  }
+    constructor(public router: Router, private auth: AuthenticationService,
+                private loginService: LoginService) {
+    }
 
-  connectUser() {
-    console.log(this.emailCtrl.value);
-    console.log(this.passwordCtrl.value);
-    this.auth.signIn(this.emailCtrl.value, this.passwordCtrl.value).then(() => console.log("connected"));
-  }
+    ngOnInit(): void {
+    }
 
-  register(){
-    this.auth.signUp(this.emailCtrl.value, this.passwordCtrl.value).then(() => console.log("register"));
-  }
+    connectUser() {
+        console.log(this.emailCtrl.value);
+        console.log(this.passwordCtrl.value);
+        this.auth.signIn(this.emailCtrl.value, this.passwordCtrl.value).then(() => console.log("connected"));
+    }
 
+    register() {
+        this.auth.signUp(this.emailCtrl.value, this.passwordCtrl.value).then(r => {
+            if (r === undefined) {
+                console.log("undefined");
+            } else if (r === null) {
+                console.log("undefined");
+            } else {
+                let createAt = firebase.Timestamp.now()
+                let newU = {
+                    id: r?.user.uid,
+                    userName: 'Anonymous',
+                    age: 0,
+                    creationAccountDate: createAt,
+                    description: '',
+                    friends: [],
+                    followed_account_id: [],
+                    publications: [],
+                    chats_id: [],
+                    imgPath: ''
+                };
+                this.loginService.addConnectedUser(newU, r?.user.uid).then(() => {
+                    console.log("User created");
+                    // display the config profile after the register for forced the user
+                    this.swalConfigProfile?.displaySwal();
+                });
+            }
+        });
+    }
 
 
 }

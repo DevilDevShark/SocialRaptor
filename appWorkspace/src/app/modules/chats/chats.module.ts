@@ -3,7 +3,8 @@ import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "src/app/app-routing.module";
 import { ChatComponent } from "./components/chatid/chat.component";
 import { ChatsComponent } from "./components/chats/chats.component";
-import { SharedModule } from "../../shared/shared.module";
+import {SharedModule} from "../../shared/shared.module";
+import {CoreModule} from "../../core/core.module";
 
 @NgModule({
     declarations: [ChatsComponent, ChatComponent],

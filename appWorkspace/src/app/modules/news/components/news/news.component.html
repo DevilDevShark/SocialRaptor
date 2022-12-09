@@ -1,0 +1,43 @@
+<mat-card class="mat-card-customize">
+    <div class="row">
+        <div class="col-2 display-contents fit-content">
+            <app-img-profile-container class="display-contents" [imgSrc]="userImgProfile"></app-img-profile-container>
+        </div>
+
+        <div class="col-9">
+            <div class="row d-block justify-content-start">
+
+                <ng-container class="justify-content-star">
+                    <span class="justify-content-start overflow-hidden fw-bold"> {{ publication?.userName }} </span>
+                    <span class="justify-content-end dayLabel"> {{ getNbDayBefore() }} </span>
+                </ng-container>
+
+            </div>
+
+            <br>
+            <span> {{ publication?.text }} </span>
+            <!-- image here if present -->
+            <img *ngIf="!!publication.imgUrl" [src]="publication.imgUrl" style="width: 100%; height: fit-content;"/>
+        </div>
+        <!-- -->
+    </div>
+
+    <!-- Button like and comments not show for comment view -->
+    <mat-card-actions *ngIf="!isComment" class="justify-content-around d-flex">
+        <!-- Button for add or remove a like -->
+        <button mat-button (click)="addLike(publication)">
+            <mat-icon *ngIf="!connectedUserAlreadyLikeThePost">favorite_border</mat-icon>
+            <mat-icon *ngIf="connectedUserAlreadyLikeThePost">favorite</mat-icon>
+            {{ publication.like?.length }}</button>
+        <!-- Button for add or view all comments -->
+        <button mat-button [routerLink]="publication.id">
+            <mat-icon>comment</mat-icon>
+            {{ publication.comment?.length }} </button>
+        <!-- Button for delete the publication if is he write by the current user -->
+        <button mat-button *ngIf="isUserCanDeletePublication()"
+                (click)="removePublication(publication)">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-card-actions>
+
+</mat-card>

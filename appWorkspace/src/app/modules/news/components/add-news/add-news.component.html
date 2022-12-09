@@ -1,0 +1,27 @@
+<mat-card class="mat-card-customize">
+    <mat-form-field class="howNewContainer" appearance="legacy">
+        <textarea matInput
+                  placeholder="Une pensee pour le Raptor ?" [formControl]="descriptionCtrl"></textarea>
+
+    </mat-form-field>
+
+    <img *ngIf="!!imgCtrl.value" [src]="imgCtrl.value" style="width: 100%; height: fit-content" />
+
+    <div class="row">
+        <div class="col image-upload justify-content-start">
+            <label for="file">
+                <mat-icon [matTooltip]="'Ajouter une image ou prendre une photo'"
+                          class="sendImg">add_photo_alternate</mat-icon>
+            </label>
+            <input type="file" id="file" (change)="readURL($event)" style="display: none;"/>
+        </div>
+
+        <div class="col d-flex justify-content-end">
+            <button [disabled]="!activeSendBtn()" (click)="send()">
+                <mat-icon>send</mat-icon>
+            </button>
+        </div>
+
+    </div>
+
+</mat-card>

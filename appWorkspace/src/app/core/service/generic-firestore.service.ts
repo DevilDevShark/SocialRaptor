@@ -15,7 +15,7 @@ import {
     WithFieldValue,
     getCountFromServer,
     AggregateField,
-    AggregateQuerySnapshot,
+    AggregateQuerySnapshot, setDoc,
 } from "@angular/fire/firestore";
 import { CollectionReference, doc, DocumentData } from "@firebase/firestore";
 import { Observable } from "rxjs";
@@ -65,8 +65,23 @@ export class GenericFirestoreService {
         return collectionData(request, { idField: "id" }) as Observable<T[]>;
     }
 
+    public fetchByArrayProperty<T>(
+        collection: CollectionReference<DocumentData>,
+        propertyName: string,
+        propertyValue: string[],
+        maxResult: number = 10
+    ): Observable<T[]> {
+        const request = query(collection, where(propertyName, "in", propertyValue), limit(maxResult));
+
+        return collectionData(request, { idField: "id" }) as Observable<T[]>;
+    }
+
     public create<T>(collection: CollectionReference<T>, object: WithFieldValue<T>): Promise<DocumentReference<T>> {
         return addDoc(collection, object);
+    }
+
+    public createWithCustomID<T>(collection: CollectionReference<T>, object: WithFieldValue<T>, id: string): Promise<void> {
+        return setDoc(doc(collection, id), object);
     }
 
     public update<T extends { id: string }>(path: string, object: T): Promise<void> {

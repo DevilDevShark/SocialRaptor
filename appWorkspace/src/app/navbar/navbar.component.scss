@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
+    display: flex;
+    width: 100%;
+    background: #fff;
+    position: relative;
+    justify-content: space-between;
+    text-align: center;
+    padding: 15px 30px;
+}
+
+nav .icon {
+    font-size: 20px;
+    font-weight: 40px;
+    color: black;
+    cursor: pointer;
+}
+
+nav ol {
+    display: flex;
+    list-style: none;
+    margin: auto 0;
+}
+
+nav ol li a {
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+}
+
+nav .seach {
+    display: flex;
+    margin: auto 0;
+    height: 35px;
+    line-height: 35px;
+}
+
+nav .seach input {
+    border: none;
+    outline: none;
+    background: #fff;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 15px;
+    width: 300px;
+}
+
+nav .bar {
+    position: relative;
+    margin: auto;
+    display: none;
+}
+
+nav .bar span {
+    position: absolute;
+    color: black;
+    font-size: 35px;
+}
+
+input [type="checkbox"] {
+    visibility: none;
+    display: none;
+}
+
+@media screen and (max-width: 1250px) {
+
+    nav {
+        display: block;
+        padding: 0;
+
+    }
+
+    nav .icon {
+        display: inline-block;
+        padding: 15px 30px;
+    }
+
+    nav .seach {
+        width: 100%;
+        display: inline-block;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
+    nav .seach input {
+        width: 90%;
+    }
+
+    nav ol {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        height: 0;
+        visibility: visible;
+        transition: 0.3s;
+    }
+
+    nav ol li {
+        text-align: center;
+
+    }
+
+    nav ol li a {
+        color: black;
+        font-size: 45px;
+        padding: 25px;
+        display: block;
+        width: 45px;
+
+    }
+
+    nav .bar {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 80px;
+        cursor: pointer;
+    }
+
+    nav .bar #bars {
+        display: none;
+    }
+
+    #check:checked~nav .bar #bars {
+        display: block
+    }
+
+
+}
