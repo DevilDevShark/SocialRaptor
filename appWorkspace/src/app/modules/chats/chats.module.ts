@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { ChatsComponent } from "./components/chats/chats.component";
+import { ChatsListItemComponent } from "./components/chats-list-item/chats-list-item.component";
 import {SharedModule} from "../../shared/shared.module";
 import {CoreModule} from "../../core/core.module";
 
@@ -8,8 +8,8 @@ import {CoreModule} from "../../core/core.module";
         SharedModule,
         CoreModule
     ],
-    declarations:[ChatsComponent],
-    exports:[ChatsComponent]
+    declarations:[ChatsListItemComponent],
+    exports:[ChatsListItemComponent]
 })
 
 export class ChatsModule {}

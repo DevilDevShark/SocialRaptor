@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class ImgProfileContainerComponent {
 
-  @Input() imgSrc: string | undefined = 'assets/default-img/rj.png';
+  @Input() imgSrc: string | undefined = '';
 
 }

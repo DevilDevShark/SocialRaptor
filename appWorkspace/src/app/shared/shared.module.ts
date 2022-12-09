@@ -12,16 +12,19 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { SwalConfigProfileComponent } from "./utils-component/swal-config-profile/swal-config-profile.component";
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 import { ImgProfileContainerComponent } from './utils-component/img-profile-container/img-profile-container.component';
+import { GenericDisplayItemInListComponent } from './utils-component/generic-display-item-in-list/generic-display-item-in-list.component';
 
 const matModules= [ MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule,
   MatTooltipModule, MatDividerModule, ReactiveFormsModule ];
 
-const components= [ ImgProfileContainerComponent, InputFieldComponent, SwalConfigProfileComponent];
+const directives = [ BackButtonDirective ];
+
+const components= [ ImgProfileContainerComponent, InputFieldComponent, GenericDisplayItemInListComponent, SwalConfigProfileComponent];
 
 @NgModule({
-  declarations: [...components, BackButtonDirective ],
-  imports: [...matModules, CommonModule, SweetAlert2Module.forRoot()],
-  exports: [...matModules, ...components, BackButtonDirective]
+  declarations: [...components, ...directives ],
+  imports: [...matModules, CommonModule, SweetAlert2Module.forRoot() ],
+  exports: [...matModules, ...components, ...directives ]
 })
 
 export class SharedModule {}
