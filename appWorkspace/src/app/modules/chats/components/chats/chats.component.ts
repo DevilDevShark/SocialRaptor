@@ -6,8 +6,7 @@ import { ChatsService } from '../../service/chats.service';
 
 @Component({
   selector: 'app-chats',
-  templateUrl: './chats.component.html',
-  styleUrls: ['./chats.component.scss']
+  templateUrl: './chats.component.html'
 })
 export class ChatsComponent implements OnInit {
   public chats?: Chats[];
@@ -17,8 +16,8 @@ export class ChatsComponent implements OnInit {
 
     if(!this.chats) this.chats = [];
   }
-  
-  ngOnInit(): void 
+
+  ngOnInit(): void
   {
 
 
