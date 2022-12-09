@@ -1,16 +1,16 @@
 <body>
     <nav>
-        <div class="icon">{{title}}</div>
+        <div class="icon">{{ title }}</div>
         <div class="seach">
             <input type="search" name="#" id="#" placeholder="saisir une recherche">
             <span class="bi bi-search">
             </span>
         </div>
         <ol>
-            <li><a class="bi bi-file-plus" routerLink="#"></a> </li>
+            <li><a class="bi bi-file-plus" [routerLink]="'news'"></a> </li>
             <li><a class="bi bi-heart" routerLink="#"></a></li>
-            <li><a class="bi bi-send" routerLink="#"></a></li>
-            <li><a  class="bi bi-person" routerLink="login"></a></li>
+            <li><a class="bi bi-send" [routerLink]="'chats'"></a></li>
+            <li><a class="bi bi-person" routerLink="login"></a></li>
         </ol>
         <label for="check" class="bar">
             <span class="bi bi-x-lg" id="bars"></span>

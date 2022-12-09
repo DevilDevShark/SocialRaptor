@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
             } else if (r === null) {
                 console.log("undefined");
             } else {
-                let createAt = firebase.Timestamp.now()
+                let createAt = firebase.Timestamp.now();
                 let newU = {
                     id: r?.user.uid,
                     userName: 'Anonymous',

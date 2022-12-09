@@ -1,9 +1,9 @@
 import { Timestamp } from "firebase/firestore";
 
 export class Chats {
-    chat:       Chat[]      = [];
-    userID:     string[]    = [];
-    id:         string      = "";
+    chat:       Chat[]      = []; // list of message
+    userID:     string[]    = []; // users participate in the conversations
+    id:         string      = ""; // id chat
     lastUpdate: Timestamp   = Timestamp.now();
 }
 
@@ -11,6 +11,6 @@ export class Chats {
 export class Chat {
     message:    string      = "";
     time:       Timestamp   = Timestamp.now();
-    fromTo:     string      = "";
+    fromTo:     string      = ""; // message who send the message
     isRead:     boolean     =false;
 }

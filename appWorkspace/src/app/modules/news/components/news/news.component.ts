@@ -20,7 +20,7 @@ export class NewsComponent implements OnInit {
     connectedUserAlreadyLikeThePost: boolean | null= null;
     connectedUser: AppUser | null = null;
 
-    userImgProfile?: string;
+    userImgProfile: string | undefined = '';
 
     // endregion
 

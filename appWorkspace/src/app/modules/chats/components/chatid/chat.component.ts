@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Timestamp } from 'firebase/firestore';
+import {AuthenticationService} from "../../../../core/service/authentication.service";
 
 
 @Component({
@@ -17,12 +18,12 @@ export class ChatComponent implements OnInit {
   private routeSub?: Subscription;
   public messageCtrl = new FormControl();
 
-  constructor(private chatService:ChatsService,private route: ActivatedRoute) { 
+  constructor(private chatService:ChatsService,
+              private auth: AuthenticationService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    
-
 
     this.routeSub = this.route.params.subscribe(params => {
       console.log(params);
@@ -31,21 +32,22 @@ export class ChatComponent implements OnInit {
         this.chats = data[0];
       });
     });
-
   }
 
   sendMessage() {
-    const message = this.messageCtrl.value;
-    
-    const a: Chat   = { 
-      fromTo:   (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random())),
-      time:     Timestamp.now(),
-      message:  message,
-      isRead:   false
-    };
+    if(!!this.auth.userInfo)
+    {
+      const newMessage: Chat   = {
+        fromTo:   this.auth.userInfo.userName,
+        time:     Timestamp.now(),
+        message:  this.messageCtrl.value,
+        isRead:   false
+      };
 
-    this.chats?.chat.push(a);
-    this.chatService.updateChats(this.chats)
+      this.chats?.chat.push(newMessage);
+      this.chatService.updateChats(this.chats);
+    }
+
 
   }
 

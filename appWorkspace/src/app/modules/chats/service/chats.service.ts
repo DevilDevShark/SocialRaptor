@@ -1,9 +1,8 @@
-import { CdkObserveContent } from "@angular/cdk/observers";
 import { Injectable } from "@angular/core";
 import { Firestore } from "@angular/fire/firestore";
 import { collection, CollectionReference, DocumentData, DocumentReference } from "firebase/firestore";
 import { Observable } from "rxjs";
-import { Chat, Chats } from "src/app/core/models/chat";
+import { Chats } from "src/app/core/models/chat";
 import { GenericFirestoreService } from "src/app/core/service/generic-firestore.service";
 import { FIREBASE_COLLECTION_PATHS } from "../constants/constant";
 
@@ -23,6 +22,10 @@ public constructor(private genericFirestoreService:GenericFirestoreService,priva
 
 public getAllChats(): Observable<Chats[]>{
     return this.genericFirestoreService.fetchAll<Chats>(this.chatsCollection, 'lastUpdate');
+}
+
+public getChatsListByChatId(chatId: string[]): Observable<Chats[]>{
+    return this.genericFirestoreService.fetchByArrayProperty<Chats>(this.chatsCollection, 'id', chatId);
 }
 
 public getChatById(id:string): Observable<Chats[]>{

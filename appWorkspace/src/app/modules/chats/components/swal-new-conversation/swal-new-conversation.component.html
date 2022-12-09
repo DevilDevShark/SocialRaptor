@@ -1,0 +1,23 @@
+<swal #swalNewConversation
+      [title]="'Nouvelle conversation'"
+      [allowOutsideClick]="true"
+      [showConfirmButton]="false"
+      [cancelButtonText]="'Annuler'">
+    <div *swalPortal="undefined" class="overflow-hidden">
+        <span class="fw-bold"> Here bar de recherche </span>
+        <div *ngFor="let f of friends | async" (click)="createAndGo(f)">
+            <div class="row">
+                <div class="col-2 display-contents fit-content">
+                    <app-img-profile-container class="display-contents"
+                            [imgSrc]="f.imgPath ? f.imgPath : 'assets/default-img/rj.png'">
+                    </app-img-profile-container>
+                </div>
+                <div class="col-9 fit-content align-items-center">
+                    <span> {{ f.userName }} </span>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</swal>
