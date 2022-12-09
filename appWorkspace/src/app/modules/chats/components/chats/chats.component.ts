@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Timestamp } from 'firebase/firestore';
-import { Chat, Chats } from 'src/app/core/models/chat';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Chats } from 'src/app/core/models/chat';
 import { ChatsService } from '../../service/chats.service';
+import { AuthenticationService } from "../../../../core/service/authentication.service";
+import { TempAppUserService } from "../../../../core/service/temp-app-user.service";
+import { AppUser } from "../../../../core/models/appUser";
+import { Observable } from "rxjs";
 
 
 @Component({
@@ -9,44 +12,32 @@ import { ChatsService } from '../../service/chats.service';
   templateUrl: './chats.component.html'
 })
 export class ChatsComponent implements OnInit {
-  public chats?: Chats[];
 
+  // region Attributes
 
-  constructor(private chatService:ChatsService) {
+  public chats?: Observable<Chats[]>;
+  public userConnected: AppUser | null = new AppUser();
 
-    if(!this.chats) this.chats = [];
+  constructor(private chatService:ChatsService,
+              private auth: AuthenticationService,
+              private tempUserService: TempAppUserService,
+              private cd: ChangeDetectorRef) {
+
+    //if(!this.chats) this.chats = [];
   }
 
   ngOnInit(): void
   {
+    setTimeout(() => {
+      this.userConnected = this.auth.userInfo;
+      if (!!this.userConnected?.chats_id)
+      {
+        this.chats =this.chatService.getChatsListByChatId(this.userConnected.chats_id);
+        // Detect change update the visual
+        this.cd.detectChanges();
+      }
 
-
-
-    this.chatService.getAllChats().subscribe((data:Chats[]) => this.chats = data)
-
+    }, 1000);
 
   }
-
-  inutile() {}
-
-  createChatId() {
-    const a: Chat   = {
-      isRead:false,
-      fromTo: (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random())),
-      time: Timestamp.now(),
-      message: "wololo :" + (Math.floor(1000 * Math.random()))+"wololo"+(Math.floor(1000 * Math.random()))
-    };
-
-    const b: Chats  = {
-        chat: [a, a, a, a],
-        lastUpdate: Timestamp.now(),
-        id: '',
-        userID:[]
-    };
-
-    this.chatService.addChats(b);
-  }
-
-
-
 }

@@ -51,9 +51,7 @@ export class SwalConfigProfileComponent {
           upUser.age = this.ageCtrl.value;
           upUser.description = this.descriptionCtrl.value;
           upUser.imgPath = this.imgCtrl.value;
-          this.tempUserService.updateConnectedUser(upUser).then(() => this.route.navigate(['/news']));
-
-
+          this.tempUserService.updateUser(upUser).then(() => this.route.navigate(['/news']));
         }
       }
     });

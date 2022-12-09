@@ -2,9 +2,7 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 html, body {
-  background: linear-gradient(#ff7189, #ff8071);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: linear-gradient(#ff7189, #ff8071) no-repeat fixed;
 }
 body {
   width: 100%;
@@ -27,4 +25,19 @@ body {
 
 .display-contents{
   display: contents !important;
+}
+
+.dayLabel {
+  color: lightgray !important;
+}
+
+::ng-deep .clickableContainer {
+  &hover {
+    background-color: lightgrey !important;
+  }
+}
+
+.generalContainer {
+  width: 50% !important;
+  margin: auto !important; // for center the body
 }

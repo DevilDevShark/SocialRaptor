@@ -6,7 +6,6 @@ import { NewsService } from "./services/news.service";
 import { CoreModule } from "../../core/core.module";
 import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { CommentComponent } from './components/comment/comment.component';
 import { AddNewsComponent } from './components/add-news/add-news.component';
@@ -25,8 +24,7 @@ const components = [ NewsComponent , NewsLayoutComponent, CommentComponent, AddN
         CommonModule,
         MatButtonModule,
         MatExpansionModule,
-        RouterModule,
-        MatIconModule
+        RouterModule
     ],
   providers: [ NewsService ]
 })
