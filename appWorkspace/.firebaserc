@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "socialraptor-3bbcd": {
+      "hosting": {
+        "appWorkspace": [
+          "socialraptor-3bbcd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "socialraptor-3bbcd"
+  }
+}

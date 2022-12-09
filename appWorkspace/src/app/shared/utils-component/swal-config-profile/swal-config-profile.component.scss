@@ -1,0 +1,13 @@
+.howNewContainer {
+  width: 100% !important;
+  border-style: none
+}
+
+::ng-deep .imgConfig {
+  width: 30% !important;
+  height: auto !important;
+}
+
+.sendImgCursor {
+  cursor: pointer !important;
+}

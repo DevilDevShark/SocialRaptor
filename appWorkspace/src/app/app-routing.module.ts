@@ -4,6 +4,7 @@ import { redirectUnauthorizedTo, canActivate, redirectLoggedInTo } from "@angula
 import { LoginComponent } from "./modules/login/components/login.component";
 import {NewsLayoutComponent} from "./modules/news/components/news-layout/news-layout.component";
 import {CommentComponent} from "./modules/news/components/comment/comment.component";
+import {ChatsComponent} from "./modules/chats/components/chats/chats.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([""]);
 const redirectLoggedInToUsers = () => redirectLoggedInTo(["/news"]);
@@ -26,6 +27,11 @@ const routes: Routes = [
     component: CommentComponent,
     loadChildren: () => import("./modules/news/news.module").then((module) => module.NewsModule),
     ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: "chats",
+    component: ChatsComponent,
+    loadChildren: () => import("./modules/chats/chats.module").then((module) => module.ChatsModule),
   },
   {
     path: "**",

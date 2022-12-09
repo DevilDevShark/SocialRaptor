@@ -12,7 +12,7 @@
     </mat-card>
     <app-add-news></app-add-news>
 
-    <div *ngFor="let p of publication" swScrollPosition="sync-loading">
-        <app-news [publication]="p"></app-news>
+    <div *ngFor="let publication of publications | async" swScrollPosition="sync-loading">
+        <app-news [publication]="publication"></app-news>
     </div>
 </ng-container>

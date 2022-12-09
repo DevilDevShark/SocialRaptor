@@ -10,12 +10,12 @@ import {CoreModule} from "../../core/core.module";
   exports: [
     LoginComponent
   ],
-  imports: [
-    CoreModule,
-    SharedModule,
-    MatDividerModule,
-    MatButtonModule
-  ]
+    imports: [
+        CoreModule,
+        SharedModule,
+        MatDividerModule,
+        MatButtonModule
+    ]
 })
 
 export class LoginModule {}

@@ -51,8 +51,6 @@ import { NavbarComponent } from './navbar/navbar.component';
   providers: [
     ScreenTrackingService, UserTrackingService, NavigationService
   ],
-  exports: [
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

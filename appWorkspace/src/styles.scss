@@ -13,6 +13,9 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/**
+  Shared class css
+ */
 .mat-card-customize {
   border-radius: unset !important;
   padding-left: 15px !important;
@@ -20,4 +23,8 @@ body {
 
 .fit-content {
   width: fit-content !important;
+}
+
+.display-contents{
+  display: contents !important;
 }
