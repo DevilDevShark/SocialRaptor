@@ -15,7 +15,7 @@ import {
     WithFieldValue,
     getCountFromServer,
     AggregateField,
-    AggregateQuerySnapshot, setDoc,
+    AggregateQuerySnapshot, setDoc, enableIndexedDbPersistence,
 } from "@angular/fire/firestore";
 import { CollectionReference, doc, DocumentData } from "@firebase/firestore";
 import { Observable } from "rxjs";
@@ -24,7 +24,13 @@ import { Observable } from "rxjs";
     providedIn: "root",
 })
 export class GenericFirestoreService {
-    constructor(private readonly firestore: Firestore) {}
+    constructor(private readonly firestore: Firestore) {
+        enableIndexedDbPersistence(this.firestore, {
+        forceOwnership: true,
+        }).catch((reason) => {
+        console.log('NO PERSISTENCE : ', reason);
+        });
+    }
 
     public count(collection: CollectionReference<DocumentData>): Promise<AggregateQuerySnapshot<{ count: AggregateField<number> }>> {
         const request = query(collection);
