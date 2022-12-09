@@ -15,9 +15,10 @@
                 <div class="bubble">
                     <span class="colorMessage"> {{ chat.message}} </span>
                 </div>
+                <br>
+                <br>
+                <span class="dayLabel">{{chat.time.toDate() | date:'dd/MM/yyyy h:mm:ss a'}}</span>
             </div>
-            <br>
-            <span class="dayLabel">{{chat.time.toDate() | date:'dd/MM/yyyy h:mm:ss a'}}</span>
         </div>
     </div>
 

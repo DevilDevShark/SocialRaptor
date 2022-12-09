@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
     public emailCtrl = new FormControl();
     public passwordCtrl = new FormControl();
 
-    constructor(public router: Router, private auth: AuthenticationService,
+    constructor(public route: Router,
+                private auth: AuthenticationService,
                 private loginService: LoginService) {
     }
 
@@ -30,7 +31,15 @@ export class LoginComponent implements OnInit {
     connectUser() {
         console.log(this.emailCtrl.value);
         console.log(this.passwordCtrl.value);
-        this.auth.signIn(this.emailCtrl.value, this.passwordCtrl.value).then(() => console.log("connected"));
+        this.auth.signIn(this.emailCtrl.value, this.passwordCtrl.value).then(r => {
+            if (r === undefined) {
+                console.log("undefined");
+            } else if (r === null) {
+                console.log("null");
+            } else {
+                this.route.navigate(['/news']);
+            }
+        });
     }
 
     register() {
