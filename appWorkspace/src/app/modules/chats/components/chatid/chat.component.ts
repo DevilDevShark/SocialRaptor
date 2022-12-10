@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { Timestamp } from 'firebase/firestore';
 import {AuthenticationService} from "../../../../core/service/authentication.service";
 import {AppUser} from "../../../../core/models/appUser";
+import {NotificationsService} from "../../../../core/service/notification.service";
 
 
 @Component({
@@ -22,15 +23,14 @@ export class ChatComponent implements OnInit {
 
   constructor(private chatService:ChatsService,
               private auth: AuthenticationService,
+              private notificationService: NotificationsService,
               private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.connectedUser = this.auth.userInfo;
-    console.log(this.connectedUser);
 
     this.routeSub = this.route.params.subscribe(params => {
-      console.log(params);
       
       this.chatService.getChatById(params['id']).subscribe( data => {
         this.chats = data[0];
@@ -49,7 +49,9 @@ export class ChatComponent implements OnInit {
       };
 
       this.chats?.chat.push(newMessage);
-      this.chatService.updateChats(this.chats);
+      this.chatService.updateChats(this.chats).then(() => {
+        this.notificationService.generateNotification(newMessage.fromTo, "Vous dit : " + this.messageCtrl.value);
+      });
     }
 
 
