@@ -1,0 +1,22 @@
+<swal #swalNewConversation
+      [title]="'Démarrer une nouvelle conversation'"
+      [allowOutsideClick]="true"
+      [showConfirmButton]="false"
+      [cancelButtonText]="'Annuler'">
+    <div *swalPortal="undefined" class="overflow-hidden">
+        <div *ngFor="let f of friends | async" (click)="createAndGo(f)" class="clickableContainer">
+            <mat-card class="mat-card-customize">
+                <div class="row">
+                    <div class="col-2 display-contents fit-content">
+                        <app-img-profile-container class="display-contents"
+                                                   [imgSrc]="f.imgPath ? f.imgPath : 'assets/default-img/rj.png'">
+                        </app-img-profile-container>
+                    </div>
+                    <div class="col-9 fit-content align-items-center">
+                        <span> {{ f.userName }} </span>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</swal>

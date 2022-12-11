@@ -1,0 +1,11 @@
+<swal #swalDisplayQRCode
+      [title]="'Votre qr-code'"
+      [allowOutsideClick]="true"
+      [showCancelButton]="false"
+      [showConfirmButton]="true"
+      [confirmButtonText]="'Fermer'">
+    <div *swalPortal="undefined">
+        <!-- Generate QR-code) -->
+        <qrcode [qrdata]="!!userConnected ? userConnected.id: 'error'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    </div>
+</swal>

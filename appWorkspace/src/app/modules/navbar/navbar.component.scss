@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
+    display: flex;
+    background: linear-gradient(#ff7189, #ff8071);
+    justify-content: space-between;
+    text-align: center;
+    padding: 15px 30px;
+
+    /**
+     * Here we made the navbar on position fixed for he's can't be affected by the scroll
+     */
+    width: 100%;
+    top: 0;
+    z-index: 1;
+    margin: auto;
+    position: fixed;
+}
+
+/*nav .icon {
+    font-size: 20px;
+    font-weight: 40px;
+    color: black;
+    cursor: pointer;
+}*/
+
+// Css of container of icon
+nav ol {
+    display: flex; // horizontal align of icon
+    list-style: none; // disabled the number list
+    margin: auto 0; // vertical align
+        /**
+        * Here on small device we made the list on position fixed and on the bottom
+        * for he's can't be affected by the scroll
+        */
+    @media (max-width: 768px) {
+        padding: inherit;
+        background: linear-gradient(#ff7189, #ff8071);
+        justify-content: space-between;
+        width: 100%;
+        z-index: 1;
+        margin: auto;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        left: 0;
+    }
+}
+
+// Visual of icon
+nav ol li a {
+    color: black;
+    font-size: 20px; // size of icon
+    padding: 5px 10px; // spacing
+    &:hover {
+        color: antiquewhite;
+    }
+}
+
+nav .seach {
+    display: flex;
+    margin: auto 0;
+    height: 35px;
+    line-height: 35px;
+}
+
+nav .seach input {
+    border: none;
+    outline: none;
+    background: #fff;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 15px;
+    width: 300px;
+}
+
+input [type="checkbox"] {
+    visibility: none;
+    display: none;
+}
+
+.powerIcon {
+    cursor: pointer;
+    background-color: rgb(255, 128, 113);
+}
+
+.searchResultContainer {
+    width: 300px;
+    z-index: 2;
+    position: fixed;
+    margin: 35px auto auto;
+    top: auto;
+}

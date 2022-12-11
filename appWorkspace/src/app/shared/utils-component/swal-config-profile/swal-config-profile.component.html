@@ -1,0 +1,38 @@
+<swal #swalConfigProfile
+      [title]="'Configure ton profile'"
+      [allowOutsideClick]="false"
+      [showConfirmButton]="shouldDisabledSendButton()"
+      [showCancelButton]="shouldCancelButtonDisabled"
+      [cancelButtonText]="'Annuler'">
+    <div *swalPortal="undefined" class="overflow-hidden">
+        <span class="fw-bold"> Avant de rencontrer tes semblables présente toi !</span>
+        <form class="h-auto">
+            <div class="row">
+                <div class="col-2 display-contents fit-content">
+                    <app-img-profile-container class="display-contents" [imgSrc]="imgCtrl.value"></app-img-profile-container>
+                </div>
+                <div class="col-9 fit-content">
+                    <app-input-field [title]="'Pseudo'" [control]="pseudoCtrl" [classForm]="'legacy'"></app-input-field>
+                    <br>
+                    <app-input-field [title]="'Age Raptoriens'" [control]="ageCtrl" [classForm]="'legacy'"></app-input-field>
+                </div>
+            </div>
+
+            <div class="col-2 image-upload justify-content-start">
+                <label for="file">
+                    <mat-icon class="sendImgCursor">add_photo_alternate</mat-icon>
+                </label>
+                <input type="file" id="file" (change)="readURL($event)" style="display: none;"/>
+            </div>
+
+            <br>
+            <mat-form-field class="howNewContainer" appearance="legacy">
+                <textarea matInput
+                          placeholder="Quel genre de fidèle est tu ? Parle nous de toi !"
+                          [formControl]="descriptionCtrl">
+                </textarea>
+            </mat-form-field>
+        </form>
+        <span class="fst-italic"> (Le bouton de validation s'affichera une fois tout les champs remplie ! )</span>
+    </div>
+</swal>

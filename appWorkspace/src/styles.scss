@@ -1,17 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-html, body { height: 100%;
-  background: linear-gradient(#ff7189, #ff8071);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+html, body {
+  background: linear-gradient(#ff7189, #ff8071) no-repeat fixed;
 }
 body {
-  width: 50%;
+  width: 100%;
+  height: 10%;
   margin: auto; // for center the body
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/**
+  Shared class css
+ */
 .mat-card-customize {
   border-radius: unset !important;
   padding-left: 15px !important;
@@ -19,4 +21,67 @@ body {
 
 .fit-content {
   width: fit-content !important;
+}
+
+.display-contents{
+  display: contents !important;
+}
+
+.dayLabel {
+  color: lightgray !important;
+}
+
+.clickableContainer {
+  &:hover mat-card {
+    transform: scale(1.1);
+    transition: all .3s ease-in-out;
+    color: #ff8071 !important;
+    background-color: black;
+  }
+}
+
+.generalContainer {
+  width: 100% !important;
+  margin: auto !important; // for center the body
+  @media (min-width: 768px) {
+    width: 50% !important;
+  }
+}
+
+.divBackButton {
+  height: 20px !important;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+  // size of navbar needed for keep it display cause navbar have a fixed position
+  margin: 76px auto auto;
+  position:fixed;
+}
+
+.backButton {
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
+  background-color: black;
+  color: white;
+  width: 50% !important;
+  @media (max-width: 768px) {
+    width: 100% !important;
+  }
+}
+
+.itemContainerHeader {
+  margin-top: 76px; // size of navbar needed for keep it display cause navbar have a fixed position
+  border-top-right-radius: 2px !important;
+  border-top-left-radius: 2px !important;
+}
+
+.itemContainerContent {
+  // only on small device
+  @media (max-width: 768px) {
+    margin-bottom: 60px; // size of bottom navbar needed for keep it display cause navbar have a fixed position
+  }
+}
+
+.itemDetailOnItemContainer {
+  margin-top: 112px; // size of navbar and back button
 }

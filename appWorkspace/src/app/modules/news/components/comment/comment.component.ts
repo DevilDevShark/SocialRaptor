@@ -1,10 +1,9 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import {Publication} from "../../../../core/models/publication";
 import {NavigationService} from "../../../../shared/directives/navigation.service";
 import {ActivatedRoute} from "@angular/router";
 import {NewsService} from "../../services/news.service";
 import {Observable} from "rxjs";
-import {AuthenticationService} from "../../../../core/service/authentication.service";
 
 @Component({
   selector: 'app-comment',
@@ -16,7 +15,8 @@ export class CommentComponent implements OnInit {
 
   // region attributes
 
-  pub$: Observable<Publication> | null = null ;
+  @Input() canRemovedComment: boolean = false;
+  pub$: Observable<Publication> | null = null;
 
   // endregion
 
@@ -24,8 +24,7 @@ export class CommentComponent implements OnInit {
 
   constructor(public navigation: NavigationService,
               private route: ActivatedRoute,
-              private cd: ChangeDetectorRef,
-              private newsService: NewsService, private a: AuthenticationService) { }
+              private newsService: NewsService) { }
 
   // endregion
 

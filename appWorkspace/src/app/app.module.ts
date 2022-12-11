@@ -17,11 +17,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SharedModule } from "./shared/shared.module";
 import { HttpClientModule } from "@angular/common/http";
-import {NavigationService} from "./shared/directives/navigation.service";
+import { NavigationService } from "./shared/directives/navigation.service";
+import { NavbarComponent } from './modules/navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     SharedModule,
@@ -48,8 +50,6 @@ import {NavigationService} from "./shared/directives/navigation.service";
   ],
   providers: [
     ScreenTrackingService, UserTrackingService, NavigationService
-  ],
-  exports: [
   ],
   bootstrap: [AppComponent]
 })

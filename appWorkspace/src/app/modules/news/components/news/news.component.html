@@ -1,32 +1,29 @@
 <mat-card class="mat-card-customize">
-    <div class="row">
-        <div class="col-2 fit-content">
-            <!-- image profile -->
-            <div class="profile-dot">
-                <figure style="background-image: url(https://i.stack.imgur.com/u20P2.jpg)"></figure>
-                <figcaption>BM</figcaption>
-            </div>
-        </div>
+    <app-item-in-list
+            [userName]="publication.userName"
+            [createdDate]="publication.date"
+            [text]="publication.text"
+            [imgProfile]="userImgProfile"></app-item-in-list>
 
-        <div class="col-9">
-            <div class="row d-block justify-content-start">
-                <span class="justify-content-start overflow-hidden fw-bold"> {{ publication?.userName }} </span><span class="justify-content-end dayLabel"> {{ getNbDayBefore() }} </span>
-            </div>
-            <br>
-            <span> {{ publication?.text }} </span>
-            <!-- image here if present -->
-            <img *ngIf="!!publication.imgUrl" [src]="publication.imgUrl" style="width: 100%; height: fit-content;"/>
-        </div>
-        <!-- -->
-    </div>
+    <!-- image here if present -->
+    <img *ngIf="!!publication.imgUrl" [src]="publication.imgUrl" style="width: 100%; height: fit-content;"/>
+
+    <!-- Button like and comments not show for comment view -->
     <mat-card-actions *ngIf="!isComment" class="justify-content-around d-flex">
+        <!-- Button for add or remove a like -->
         <button mat-button (click)="addLike(publication)">
             <mat-icon *ngIf="!connectedUserAlreadyLikeThePost">favorite_border</mat-icon>
             <mat-icon *ngIf="connectedUserAlreadyLikeThePost">favorite</mat-icon>
             {{ publication.like?.length }}</button>
+        <!-- Button for add or view all comments -->
         <button mat-button [routerLink]="publication.id">
             <mat-icon>comment</mat-icon>
             {{ publication.comment?.length }} </button>
+        <!-- Button for delete the publication if is he write by the current user -->
+        <button mat-button *ngIf="isUserCanDeletePublication()"
+                (click)="removePublication(publication)">
+            <mat-icon>delete</mat-icon>
+        </button>
     </mat-card-actions>
 
 </mat-card>

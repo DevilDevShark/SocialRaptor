@@ -15,7 +15,7 @@ import {
     WithFieldValue,
     getCountFromServer,
     AggregateField,
-    AggregateQuerySnapshot, setDoc,
+    AggregateQuerySnapshot, setDoc, enableIndexedDbPersistence,
 } from "@angular/fire/firestore";
 import { CollectionReference, doc, DocumentData } from "@firebase/firestore";
 import { Observable } from "rxjs";
@@ -24,7 +24,13 @@ import { Observable } from "rxjs";
     providedIn: "root",
 })
 export class GenericFirestoreService {
-    constructor(private readonly firestore: Firestore) {}
+    constructor(private readonly firestore: Firestore) {
+        enableIndexedDbPersistence(this.firestore, {
+        forceOwnership: true,
+        }).catch((reason) => {
+        console.log('NO PERSISTENCE : ', reason);
+        });
+    }
 
     public count(collection: CollectionReference<DocumentData>): Promise<AggregateQuerySnapshot<{ count: AggregateField<number> }>> {
         const request = query(collection);
@@ -32,7 +38,7 @@ export class GenericFirestoreService {
         return getCountFromServer(request);
     }
 
-    public fetchAll<T>(collection: CollectionReference<DocumentData>, propertyName: string, direction: "asc" | "desc" = "asc"): Observable<T[]> {
+    public fetchAll<T>(collection: CollectionReference<DocumentData>, propertyName: string, direction: "asc" | "desc" = "desc"): Observable<T[]> {
         const request = query(collection, orderBy(propertyName, direction));
         return collectionData(request, { idField: "id" }) as Observable<T[]>;
     }
@@ -61,6 +67,17 @@ export class GenericFirestoreService {
         maxResult: number = 5
     ): Observable<T[]> {
         const request = query(collection, where(propertyName, "==", propertyValue), limit(maxResult));
+
+        return collectionData(request, { idField: "id" }) as Observable<T[]>;
+    }
+
+    public fetchByArrayProperty<T>(
+        collection: CollectionReference<DocumentData>,
+        propertyName: string,
+        propertyValue: string[],
+        maxResult: number = 10
+    ): Observable<T[]> {
+        const request = query(collection, where(propertyName, "in", propertyValue), limit(maxResult));
 
         return collectionData(request, { idField: "id" }) as Observable<T[]>;
     }

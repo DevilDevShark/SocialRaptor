@@ -4,9 +4,9 @@
         </button>
 </div>
 
-<div class="commentViewContainer" *ngIf="pub$ | async as p">
+<div class="itemDetailOnItemContainer" *ngIf="pub$ | async as p">
     <app-news [publication]="p"></app-news>
-    <app-add-news [orginalPublication]="p"></app-add-news>
+    <app-add-news [originalPublication]="p"></app-add-news>
 
     <ng-container *ngIf="p?.comment?.length === 0">
         <span> No comment</span>

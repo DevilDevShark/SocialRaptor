@@ -1,1 +1,41 @@
-<p>chats works!</p>
+<app-swal-new-conversation #swalNewConversationComponent [userConnected]="userConnected"
+                           [chats]="chats | async">
+</app-swal-new-conversation>
+<app-swal-qr-code #swalQrCode [userConnected]="userConnected"></app-swal-qr-code>
+
+<app-swal-scan-qrcode #swalScanQrCode></app-swal-scan-qrcode>
+
+<mat-card class="mat-card-customize itemContainerHeader">
+    <h2>Vos conversations</h2>
+</mat-card>
+
+<button mat-fab (click)="swalQrCode?.displaySwal()">
+    <mat-icon>center_focus_strong</mat-icon>
+</button>
+
+<button mat-fab (click)="swalScanQrCode?.displaySwal()">
+    <mat-icon>center_focus_weak</mat-icon>
+</button>
+
+<button mat-fab class="newConversationBtn" (click)="swalNewConversationComponent?.displaySwal()">
+    <mat-icon>question_answer</mat-icon>
+</button>
+
+<ng-container *ngIf="chats | async as chatsList" class="itemContainerContent">
+    <div *ngFor="let chat of chatsList" class="clickableContainer">
+        <mat-card *ngIf="chat.chat.length > 0"
+                  class="mat-card-customize"
+                  [routerLink]="'/chat/' + chat.id">
+            <app-item-in-list
+                    [userName]="getFriendConversationName(chat.chat)"
+                    [text]="getLastChatMessage(chat.chat[chat.chat.length -1].fromTo, chat.chat[chat.chat.length -1].message)"
+                    [createdDate]="chat.chat[chat.chat.length -1].time"
+                    [imgProfile]="undefined"></app-item-in-list>
+        </mat-card>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="!(chats | async)">
+    <br>
+    <span class="bg-white"> YOU HAVE NO SOCIAL LIFE </span>
+</ng-container>

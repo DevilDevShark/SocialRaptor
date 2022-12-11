@@ -12,6 +12,7 @@ export const environment = {
     messagingSenderId: '807879198706',
     measurementId: 'G-Y689TTZQBX',
   },
+  publicVAPID: "BAHEv0utccwpEAJSFz8LqEGHb2SP2ffwPWnlJ-KY4jQ6u7YsN2cPmo-VJT9QVQ0EfgcX2KgGBvtLZtr6pbP1x3k",
   production: false
 };
 
