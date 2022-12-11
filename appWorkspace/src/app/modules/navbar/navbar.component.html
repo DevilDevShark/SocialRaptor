@@ -2,7 +2,24 @@
     <nav>
         <div> <img src="assets/default-img/rj-icon.png" class="mat-icon-button" [routerLink]="'news'"> </div>
         <div class="seach">
-            <input type="search" name="#" id="#" placeholder="saisir une recherche">
+            <input type="search" (ngModelChange)="dynamicSearch()" name="#" id="#" [formControl]="searchInputCtrl" placeholder="Recherche un utilisateur">
+            <div *ngIf="usersFind$ | async as usersList" class="itemContainerContent searchResultContainer">
+                <div *ngFor="let user of usersList" class="clickableContainer">
+                    <mat-card class="mat-card-customize"
+                              [routerLink]="'/user/' + user.id">
+                        <div class="row">
+                            <div class="col-2 display-contents fit-content">
+                                <app-img-profile-container class="display-contents"
+                                                           [imgSrc]="user.imgPath ? user.imgPath : 'assets/default-img/rj.png'">
+                                </app-img-profile-container>
+                            </div>
+                            <div class="col-9 fit-content align-items-center">
+                                <span> {{ user.userName }} </span>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
             <span class="bi bi-search">
             </span>
         </div>

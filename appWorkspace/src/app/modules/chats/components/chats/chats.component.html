@@ -4,7 +4,10 @@
 <mat-card class="mat-card-customize itemContainerHeader">
     <h2>Vos conversations</h2>
 </mat-card>
-<button mat-raised-button color="primary" (click)="swalNewConversationComponent?.displaySwal()">Creer un chat</button>
+
+<button mat-fab class="newConversationBtn" (click)="swalNewConversationComponent?.displaySwal()">
+    <mat-icon>question_answer</mat-icon>
+</button>
 
 <ng-container *ngIf="chats | async as chatsList" class="itemContainerContent">
     <div *ngFor="let chat of chatsList" class="clickableContainer">
