@@ -13,17 +13,20 @@ import { SwalConfigProfileComponent } from "./utils-component/swal-config-profil
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 import { ImgProfileContainerComponent } from './utils-component/img-profile-container/img-profile-container.component';
 import { GenericDisplayItemInListComponent } from './utils-component/generic-display-item-in-list/generic-display-item-in-list.component';
+import { SwalQrCodeComponent } from './utils-component/swal-qr-code/swal-qr-code.component';
+import { QRCodeModule } from "angularx-qrcode";
 
 const matModules= [ MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule,
   MatTooltipModule, MatDividerModule, ReactiveFormsModule ];
 
 const directives = [ BackButtonDirective ];
 
-const components= [ ImgProfileContainerComponent, InputFieldComponent, GenericDisplayItemInListComponent, SwalConfigProfileComponent];
+const components= [ ImgProfileContainerComponent, InputFieldComponent, GenericDisplayItemInListComponent,
+  SwalConfigProfileComponent, SwalQrCodeComponent ];
 
 @NgModule({
-  declarations: [...components, ...directives ],
-  imports: [...matModules, CommonModule, SweetAlert2Module.forRoot() ],
+  declarations: [...components, ...directives, SwalQrCodeComponent ],
+  imports: [...matModules, CommonModule, SweetAlert2Module.forRoot(), QRCodeModule ],
   exports: [...matModules, ...components, ...directives ]
 })
 
