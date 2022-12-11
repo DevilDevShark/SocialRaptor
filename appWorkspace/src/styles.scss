@@ -41,9 +41,11 @@ body {
 }
 
 .generalContainer {
-
-  width: 50% !important;
+  width: 100% !important;
   margin: auto !important; // for center the body
+  @media (min-width: 768px) {
+    width: 50% !important;
+  }
 }
 
 .divBackButton {
@@ -51,7 +53,8 @@ body {
   width: 100%;
   top: 0;
   z-index: 1;
-  margin: auto;
+  // size of navbar needed for keep it display cause navbar have a fixed position
+  margin: 76px auto auto;
   position:fixed;
 }
 
@@ -61,4 +64,24 @@ body {
   background-color: black;
   color: white;
   width: 50% !important;
+  @media (max-width: 768px) {
+    width: 100% !important;
+  }
+}
+
+.itemContainerHeader {
+  margin-top: 76px; // size of navbar needed for keep it display cause navbar have a fixed position
+  border-top-right-radius: 2px !important;
+  border-top-left-radius: 2px !important;
+}
+
+.itemContainerContent {
+  // only on small device
+  @media (max-width: 768px) {
+    margin-bottom: 60px; // size of bottom navbar needed for keep it display cause navbar have a fixed position
+  }
+}
+
+.itemDetailOnItemContainer {
+  margin-top: 112px; // size of navbar and back button
 }

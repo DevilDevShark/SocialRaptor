@@ -5,6 +5,8 @@ import { GenericStorageService } from "./generic-storage.service";
 import { Firestore } from "@angular/fire/firestore";
 import { AppUser } from "../models/appUser";
 import {Observable} from "rxjs";
+import firebase from "firebase/compat";
+
 
 @Injectable({
     providedIn: "root",

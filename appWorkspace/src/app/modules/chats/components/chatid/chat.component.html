@@ -7,7 +7,7 @@
     </a>
 </div>
 
-<mat-card>
+<mat-card class="itemDetailOnItemContainer">
     <div *ngFor="let chat of chats.chat">
         <div class="d-flex"
              [ngClass]="chat.fromTo === connectedUser?.userName ? 'justify-content-end' : 'justify-content-start'">

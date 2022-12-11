@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Chats } from 'src/app/core/models/chat';
+import { Chat, Chats } from 'src/app/core/models/chat';
 import { ChatsService } from '../../service/chats.service';
 import { AuthenticationService } from "../../../../core/service/authentication.service";
 import { TempAppUserService } from "../../../../core/service/temp-app-user.service";
@@ -8,36 +8,49 @@ import { Observable } from "rxjs";
 
 
 @Component({
-  selector: 'app-chats',
-  templateUrl: './chats.component.html'
+    selector: 'app-chats',
+    templateUrl: './chats.component.html'
 })
 export class ChatsComponent implements OnInit {
 
-  // region Attributes
+    // region Attributes
 
-  public chats?: Observable<Chats[]>;
-  public userConnected: AppUser | null = new AppUser();
+    public chats?: Observable<Chats[]>;
+    public userConnected: AppUser | null = new AppUser();
 
-  constructor(private chatService:ChatsService,
-              private auth: AuthenticationService,
-              private tempUserService: TempAppUserService,
-              private cd: ChangeDetectorRef) {
+    // endregion
 
-    //if(!this.chats) this.chats = [];
-  }
+    constructor(private chatService: ChatsService,
+                private auth: AuthenticationService,
+                private tempUserService: TempAppUserService,
+                private cd: ChangeDetectorRef) {
+    }
 
-  ngOnInit(): void
-  {
-    setTimeout(() => {
-      this.userConnected = this.auth.userInfo;
-      if (!!this.userConnected?.chats_id)
-      {
-        this.chats =this.chatService.getChatsListByChatId(this.userConnected.chats_id);
-        // Detect change update the visual
-        this.cd.detectChanges();
-      }
+    ngOnInit(): void {
+        setTimeout(() => {
+            this.userConnected = this.auth.userInfo;
+            if (!!this.userConnected?.chats_id) {
+                this.chats = this.chatService.getChatsListByChatId(this.userConnected.chats_id);
+                // Detect change update the visual
+                this.cd.detectChanges();
+            }
 
-    }, 1000);
+        }, 1000);
 
-  }
+    }
+
+    getFriendConversationName(chat: Chat[]): string {
+        const chatWithFromToDifferentToConnectedUser: any = chat.find(el => el.fromTo !== this.userConnected?.userName);
+        return chatWithFromToDifferentToConnectedUser.fromTo;
+    }
+
+    /**
+     * Get the last message of the conversation and show the answer
+     * @param fromTo Author of the last message
+     * @param message
+     */
+    getLastChatMessage(fromTo: string, message: string) {
+        const startM = fromTo === this.userConnected?.userName ? "Vous avez écrit: " : fromTo + "A écrit: ";
+        return startM + message;
+    }
 }

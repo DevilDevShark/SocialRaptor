@@ -2,7 +2,7 @@ import { Timestamp } from "firebase/firestore";
 
 export class Chats {
     chat:       Chat[]      = []; // list of message
-    userID:     string[]    = []; // users participate in the conversations
+    userID:     string[]    = []; // usersID participate in the conversations
     id:         string      = ""; // id chat
     lastUpdate: Timestamp   = Timestamp.now();
 }
