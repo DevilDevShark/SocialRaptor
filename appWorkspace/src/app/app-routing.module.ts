@@ -6,6 +6,7 @@ import { NewsLayoutComponent } from "./modules/news/components/news-layout/news-
 import { CommentComponent } from "./modules/news/components/comment/comment.component";
 import { ChatComponent } from "./modules/chats/components/chatid/chat.component";
 import { ChatsComponent } from "./modules/chats/components/chats/chats.component";
+import { QrcodeComponent } from './shared/utils-component/qrcode/qrcode.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([""]);
 const redirectLoggedInToUsers = () => redirectLoggedInTo(["/news"]);
@@ -13,7 +14,7 @@ const redirectLoggedInToUsers = () => redirectLoggedInTo(["/news"]);
 const routes: Routes = [
   {
     component: LoginComponent,
-    path: "",
+    path: "login",
     loadChildren: () => import("./modules/login/login.module").then((module) => module.LoginModule),
     ...canActivate(redirectLoggedInToUsers),
   },

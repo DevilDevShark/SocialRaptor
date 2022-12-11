@@ -17,13 +17,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SharedModule } from "./shared/shared.module";
 import { HttpClientModule } from "@angular/common/http";
-import {NavigationService} from "./shared/directives/navigation.service";
+import { NavigationService } from "./shared/directives/navigation.service";
 import { NavbarComponent } from './modules/navbar/navbar.component';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+import { QrcodeComponent } from './shared/utils-component/qrcode/qrcode.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    QrcodeComponent
   ],
   imports: [
     SharedModule,
@@ -31,6 +34,7 @@ import { NavbarComponent } from './modules/navbar/navbar.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    NgxScannerQrcodeModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
@@ -50,6 +54,9 @@ import { NavbarComponent } from './modules/navbar/navbar.component';
   ],
   providers: [
     ScreenTrackingService, UserTrackingService, NavigationService
+  ],
+  exports: [
+    NgxScannerQrcodeModule
   ],
   bootstrap: [AppComponent]
 })
