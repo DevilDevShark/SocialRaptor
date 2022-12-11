@@ -3,12 +3,18 @@
 </app-swal-new-conversation>
 <app-swal-qr-code #swalQrCode [userConnected]="userConnected"></app-swal-qr-code>
 
+<app-swal-scan-qrcode #swalScanQrCode></app-swal-scan-qrcode>
+
 <mat-card class="mat-card-customize itemContainerHeader">
     <h2>Vos conversations</h2>
 </mat-card>
 
 <button mat-fab (click)="swalQrCode?.displaySwal()">
     <mat-icon>center_focus_strong</mat-icon>
+</button>
+
+<button mat-fab (click)="swalScanQrCode?.displaySwal()">
+    <mat-icon>center_focus_weak</mat-icon>
 </button>
 
 <button mat-fab class="newConversationBtn" (click)="swalNewConversationComponent?.displaySwal()">
