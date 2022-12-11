@@ -7,13 +7,14 @@ import { CommentComponent } from "./modules/news/components/comment/comment.comp
 import { ChatComponent } from "./modules/chats/components/chatid/chat.component";
 import { ChatsComponent } from "./modules/chats/components/chats/chats.component";
 
+
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([""]);
 const redirectLoggedInToUsers = () => redirectLoggedInTo(["/news"]);
 
 const routes: Routes = [
   {
     component: LoginComponent,
-    path: "",
+    path: "login",
     loadChildren: () => import("./modules/login/login.module").then((module) => module.LoginModule),
     ...canActivate(redirectLoggedInToUsers),
   },
@@ -44,7 +45,7 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: "not-found",
-  },
+  }
 ];
 
 @NgModule({
