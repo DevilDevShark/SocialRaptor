@@ -4,7 +4,6 @@
       [showConfirmButton]="false"
       [cancelButtonText]="'Annuler'">
     <div *swalPortal="undefined" class="overflow-hidden">
-        <span class="fw-bold"> Here bar de recherche </span>
         <div *ngFor="let f of friends | async" (click)="createAndGo(f)" class="clickableContainer">
             <mat-card class="mat-card-customize">
                 <div class="row">
