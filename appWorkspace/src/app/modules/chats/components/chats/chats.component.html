@@ -1,14 +1,22 @@
 <app-swal-new-conversation #swalNewConversationComponent [userConnected]="userConnected"
                            [chats]="chats | async">
 </app-swal-new-conversation>
-<button mat-raised-button color="primary" (click)="swalNewConversationComponent?.displaySwal()">Crer un chat</button>
+<mat-card class="mat-card-customize itemContainerHeader">
+    <h2>Vos conversations</h2>
+</mat-card>
 
-<ng-container *ngIf="chats | async as chatsList">
+<button mat-fab class="newConversationBtn" (click)="swalNewConversationComponent?.displaySwal()">
+    <mat-icon>question_answer</mat-icon>
+</button>
+
+<ng-container *ngIf="chats | async as chatsList" class="itemContainerContent">
     <div *ngFor="let chat of chatsList" class="clickableContainer">
-        <mat-card class="mat-card-customize" [routerLink]="'/chat/' + chat.id">
+        <mat-card *ngIf="chat.chat.length > 0"
+                  class="mat-card-customize"
+                  [routerLink]="'/chat/' + chat.id">
             <app-item-in-list
-                    [userName]="chat.chat[chat.chat.length -1].fromTo"
-                    [text]="chat.chat[chat.chat.length -1].message"
+                    [userName]="getFriendConversationName(chat.chat)"
+                    [text]="getLastChatMessage(chat.chat[chat.chat.length -1].fromTo, chat.chat[chat.chat.length -1].message)"
                     [createdDate]="chat.chat[chat.chat.length -1].time"
                     [imgProfile]="undefined"></app-item-in-list>
         </mat-card>

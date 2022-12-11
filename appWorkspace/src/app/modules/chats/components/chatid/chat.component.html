@@ -1,13 +1,33 @@
-<a href="/chats">
-    <button mat-raised-button color="primary">Retour</button>
-</a>
-<p>chat {{chats.id}} - ID works!</p>
-
-<div *ngFor="let chat of chats.chat">
-    <h4>{{chat.fromTo}} ({{chat.time.toDate() | date:'dd/MM/yyyy h:mm:ss a'}}) => {{chat.message}}</h4>
+<div class="divBackButton">
+    <a href="/chats">
+        <button mat-button class="backButton">
+            <mat-icon class="me-3">keyboard_backspace</mat-icon>
+            Retour
+        </button>
+    </a>
 </div>
 
-<mat-card-actions>
-    <app-input-field [title]="'Message'" [control]="messageCtrl"></app-input-field>
-    <button mat-raised-button color="primary" (click)="sendMessage()">Envoyer</button>
-</mat-card-actions>
+<mat-card class="itemDetailOnItemContainer">
+    <div *ngFor="let chat of chats.chat">
+        <div class="d-flex"
+             [ngClass]="chat.fromTo === connectedUser?.userName ? 'justify-content-end' : 'justify-content-start'">
+            <div [ngClass]="chat.fromTo === connectedUser?.userName ? 'outgoing' : 'incoming'">
+                <div class="bubble">
+                    <span class="colorMessage"> {{ chat.message}} </span>
+                </div>
+                <br>
+                <br>
+                <span class="dayLabel">{{chat.time.toDate() | date:'dd/MM/yyyy h:mm:ss a'}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <div class="chat">
+            <app-input-field [title]="'Message'" [control]="messageCtrl"></app-input-field>
+            <button mat-raised-button color="primary" (click)="sendMessage()">
+                <mat-icon>send</mat-icon>
+            </button>
+        </div>
+    </div>
+</mat-card>

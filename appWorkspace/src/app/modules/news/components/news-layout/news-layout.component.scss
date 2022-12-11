@@ -1,5 +1,6 @@
-.mat-card-customize-header {
-  margin-top: 3px;
-  border-top-right-radius: 2px !important;
-  border-top-left-radius: 2px !important;
+.newsContainer {
+  // only on small device
+  @media (max-width: 768px) {
+    margin-bottom: 60px; // size of bottom navbar needed for keep it display cause navbar have a fixed position
+  }
 }

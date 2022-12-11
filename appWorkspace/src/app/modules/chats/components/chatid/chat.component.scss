@@ -1,0 +1,42 @@
+.colorMessage {
+  color: white;
+}
+
+.incoming {
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+  .bubble {
+    background: lighten(#212529FF, 23%);
+  }
+}
+
+.bubble {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 5px;
+  color: #FFFFFFFF;
+  font-size: 0.7em;
+  padding: 10px 10px 10px 12px;
+  border-radius: 20px;
+}
+
+.outgoing {
+  padding: 20px;
+  right: 0;
+  top: 15%;
+  width: 50%;
+  height: 100%;
+  .bubble {
+    background: #0D6EFDFF;
+    float: right;
+  }
+}
+
+.bottom-bar {
+  width: 100%;
+  height: 55px;
+  bottom: 0;
+  background: #FFFFFFFF;
+  border-radius: 0 0 10px 10px;
+}
