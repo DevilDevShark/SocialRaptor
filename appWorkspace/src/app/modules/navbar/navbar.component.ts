@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from "../../core/service/authentication.service";
 import {Router} from "@angular/router";
 import {TempAppUserService} from "../../core/service/temp-app-user.service";
@@ -11,7 +11,7 @@ import {AppUser} from "../../core/models/appUser";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
   // region Attributes
 
@@ -20,11 +20,19 @@ export class NavbarComponent {
   searchInputCtrl = new FormControl();
   usersFind$: Observable<AppUser[]> | null = null;
 
+  currentUser: AppUser | null = new AppUser();
+
   // endregion
 
   constructor( private auth: AuthenticationService,
                private tempAppUser: TempAppUserService,
                private route: Router) { }
+
+  ngOnInit() {
+    setTimeout(() =>{
+      this.currentUser = this.auth.userInfo;
+    }, 1000);
+  }
 
   /**
    * On click of the power button the user was disconnected and redirect to the login page

@@ -19,6 +19,11 @@ export class TempAppUserService {
         this.usersCollection = collection(this.firestore, 'user');
     }
 
+    public getUserById(userId: string): Observable<AppUser>
+    {
+        return this.genericFirestoreService.fetchById<AppUser>('user', userId);
+    }
+
     public updateUser(user: AppUser) {
         return this.genericFirestoreService.update<AppUser>('user', user);
     }

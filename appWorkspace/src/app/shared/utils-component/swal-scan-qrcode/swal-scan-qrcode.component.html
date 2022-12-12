@@ -7,8 +7,9 @@
             <div class="row">
                 <div class="col-10 offset-1">
                     <ngx-scanner-qrcode #action="scanner"></ngx-scanner-qrcode>
-                    <p class="data">{{ action.data | async }}</p>
+                    <p  class="data">{{ action.data | async }}</p>
                     <p *ngIf="action.isLoading">⌛ Loading...</p>
+                    <!--<p *ngIf="!!action.data"> {{ addFriendFunction.bind(userProfile) }} Ami ajouté !</p> -->
                     <button (click)="action.start()">{{action.isStart ? 'Stop' : 'Start'}}</button>
 
                 </div>
