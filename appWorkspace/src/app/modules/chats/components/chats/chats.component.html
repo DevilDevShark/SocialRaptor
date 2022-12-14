@@ -10,7 +10,7 @@
     <mat-icon>question_answer</mat-icon>
 </button>
 
-<ng-container *ngIf="chats | async as chatsList" class="itemContainerContent">
+<section *ngIf="chats | async as chatsList" class="itemContainerContent">
     <div *ngFor="let chat of chatsList" class="clickableContainer">
         <mat-card *ngIf="chat.chat.length > 0"
                   class="mat-card-customize"
@@ -22,7 +22,7 @@
                     [imgProfile]="undefined"></app-item-in-list>
         </mat-card>
     </div>
-</ng-container>
+</section>
 
 <ng-container *ngIf="!(chats | async)">
     <br>
