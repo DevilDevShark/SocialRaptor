@@ -6,6 +6,7 @@ import { NewsLayoutComponent } from "./modules/news/components/news-layout/news-
 import { CommentComponent } from "./modules/news/components/comment/comment.component";
 import { ChatComponent } from "./modules/chats/components/chatid/chat.component";
 import { ChatsComponent } from "./modules/chats/components/chats/chats.component";
+import { UserProfileComponent } from "./modules/user-profile/components/user-profile/user-profile.component";
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([""]);
@@ -17,6 +18,12 @@ const routes: Routes = [
     path: "login",
     loadChildren: () => import("./modules/login/login.module").then((module) => module.LoginModule),
     ...canActivate(redirectLoggedInToUsers),
+  },
+  {
+    component: UserProfileComponent,
+    path: "user/:id",
+    loadChildren: () => import("./modules/user-profile/user-profile.module").then((module) => module.UserProfileModule),
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
     component: ChatComponent,

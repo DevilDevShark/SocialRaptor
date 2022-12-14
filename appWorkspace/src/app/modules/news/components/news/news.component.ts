@@ -57,24 +57,6 @@ export class NewsComponent implements OnInit {
         this.connectedUser = this.auth.userInfo;
     }
 
-    /**
-     * Get the number of days before today
-     */
-    getNbDayBefore(): string {
-
-        let currentDate = new Date(); // today's date
-        let creationDate = this.publication.date?.toDate().getTime();
-
-        let deltaInMinutes = Math.round((currentDate.getTime() -  creationDate) /  60 / 1000);
-        let deltaInHours =  Math.round(deltaInMinutes / 60);
-        let deltaInDays =  Math.round(deltaInHours / 24);
-
-        return deltaInDays > 0 ? deltaInDays + 'j':
-            deltaInHours < 25 && deltaInHours > 0 ? deltaInHours + 'h':
-                deltaInMinutes > 0 && deltaInMinutes < 60 ? deltaInMinutes + "min":
-                    '0s';
-    }
-
     addLike(publicationClicked: Publication) {
         // Get the index of the userConnected on the list
         let indexOfUserConnected = publicationClicked.like.indexOf(<string>this.connectedUser?.userName);

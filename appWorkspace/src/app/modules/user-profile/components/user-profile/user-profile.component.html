@@ -1,0 +1,26 @@
+<mat-card class="mat-card-customize itemDetailOnItemContainer" *ngIf="userProfile | async as userProfile">
+    <app-swal-qr-code #swalQrCode [userConnected]="userProfile"></app-swal-qr-code>
+    <app-swal-scan-qrcode #swalScanQrCode></app-swal-scan-qrcode>
+
+    <section>
+        <app-item-in-list [userName]="userProfile.userName"
+                          [text]="userProfile.description"
+                          [imgProfile]="userImgProfile">
+        </app-item-in-list>
+    </section>
+    <mat-card-actions class="justify-content-around d-flex">
+        <!-- Button for add friend -->
+        <button mat-button *ngIf="userProfile.id !== currentUser?.id" (click)="addFriend(userProfile)">
+            <mat-icon *ngIf="!connectedUserAlreadyHaveThisFriend">person_add</mat-icon>
+            <mat-icon *ngIf="connectedUserAlreadyHaveThisFriend">check_circle</mat-icon>
+        </button>
+
+        <button mat-fab (click)="swalQrCode?.displaySwal()">
+            <mat-icon>center_focus_strong</mat-icon>
+        </button>
+
+        <button mat-fab (click)="swalScanQrCode?.displaySwal()">
+            <mat-icon>center_focus_weak</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>

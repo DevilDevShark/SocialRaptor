@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { SwalComponent } from "@sweetalert2/ngx-sweetalert2";
 
 @Component({
@@ -11,6 +11,8 @@ export class SwalScanQrcodeComponent {
   // region Attributes
 
   @ViewChild('swalScanner') swalScanner!: SwalComponent;
+  /*@Input() addFriendFunction!: (userProfilePage: AppUser) => void;
+  @Input() userProfile!: AppUser;*/
 
   // endregion
 
@@ -18,5 +20,4 @@ export class SwalScanQrcodeComponent {
   {
     this.swalScanner.fire().then();
   }
-
 }
