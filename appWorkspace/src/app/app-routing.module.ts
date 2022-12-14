@@ -51,7 +51,9 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "not-found",
+    component: LoginComponent,
+    loadChildren: () => import("./modules/login/login.module").then((module) => module.LoginModule),
+    ...canActivate(redirectLoggedInToUsers),
   }
 ];
 
