@@ -26,7 +26,7 @@
         <ol>
             <li><a class="bi bi-house" [routerLink]="'news'"></a> </li>
             <li><a class="bi bi-chat" [routerLink]="'chats'"></a></li>
-            <li><a class="bi bi-person" *ngIf="currentUser | async as cU" [routerLink]="'user/'+ cU.id"></a></li>
+            <li><a class="bi bi-person" [routerLink]="'user/'+ getCurrentUser()"></a></li>
             <li><a class="bi bi-power powerIcon rounded" (click)="logout()"></a></li>
         </ol>
     </nav>

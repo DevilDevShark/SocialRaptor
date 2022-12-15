@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from "../../core/service/authentication.service";
 import {Router} from "@angular/router";
 import {TempAppUserService} from "../../core/service/temp-app-user.service";
@@ -11,7 +11,7 @@ import {AppUser} from "../../core/models/appUser";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnChanges {
 
   // region Attributes
 
@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   searchInputCtrl = new FormControl();
   usersFind$: Observable<AppUser[]> | null = null;
 
-  currentUser: Observable<AppUser | null> | null = null;
+  currentUser: AppUser | null = null;
 
   // endregion
 
@@ -31,16 +31,25 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() =>{
-      this.currentUser = of(this.auth.userInfo);
+      this.currentUser = this.auth.userInfo;
       this.cd.detectChanges();
     }, 1000);
+  }
+
+  ngOnChanges() {
+    if(this.currentUser === null) {
+      this.currentUser = this.auth.userInfo;
+    }
   }
 
   /**
    * On click of the power button the user was disconnected and redirect to the login page
    */
   logout() {
-    this.auth.signOut().then(() => this.route.navigate(['login']))
+    this.auth.signOut().then(() => {
+      window.location.reload();
+      this.route.navigate(['login']);
+    });
   }
 
   dynamicSearch() {
@@ -58,5 +67,9 @@ export class NavbarComponent implements OnInit {
       if(!!users)this.usersFind$ = of(users);
       else this.usersFind$ = null;
     });
+  }
+
+  getCurrentUser() {
+    return '' + this.currentUser?.id;
   }
 }

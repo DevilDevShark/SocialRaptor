@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
             } else if (r === null) {
                 console.log("null");
             } else {
+                window.location.reload();
                 this.route.navigate(['/news']);
             }
         });
