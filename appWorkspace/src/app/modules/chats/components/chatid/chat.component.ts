@@ -52,9 +52,8 @@ export class ChatComponent implements OnInit {
       this.chatService.updateChats(this.chats).then(() => {
         this.notificationService.generateNotification(newMessage.fromTo, "Vous dit : " + this.messageCtrl.value);
       });
+      this.messageCtrl.reset();
     }
-
-
   }
 
 }
