@@ -42,7 +42,7 @@ export class ChatsComponent implements OnInit {
 
     getFriendConversationName(chat: Chat[]): string {
         const chatWithFromToDifferentToConnectedUser: any = chat.find(el => el.fromTo !== this.userConnected?.userName);
-        return chatWithFromToDifferentToConnectedUser.fromTo;
+        return !!chatWithFromToDifferentToConnectedUser ? chatWithFromToDifferentToConnectedUser.fromTo: 'Votre nouveau correspondant mystère';
     }
 
     /**
