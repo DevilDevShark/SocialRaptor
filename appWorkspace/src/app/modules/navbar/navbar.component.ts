@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from "../../core/service/authentication.service";
 import {Router} from "@angular/router";
 import {TempAppUserService} from "../../core/service/temp-app-user.service";
@@ -20,17 +20,19 @@ export class NavbarComponent implements OnInit {
   searchInputCtrl = new FormControl();
   usersFind$: Observable<AppUser[]> | null = null;
 
-  currentUser: AppUser | null = new AppUser();
+  currentUser: Observable<AppUser | null> | null = null;
 
   // endregion
 
   constructor( private auth: AuthenticationService,
+               private cd: ChangeDetectorRef,
                private tempAppUser: TempAppUserService,
                private route: Router) { }
 
   ngOnInit() {
     setTimeout(() =>{
-      this.currentUser = this.auth.userInfo;
+      this.currentUser = of(this.auth.userInfo);
+      this.cd.detectChanges();
     }, 1000);
   }
 

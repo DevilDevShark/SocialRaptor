@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
             if (r === undefined) {
                 console.log("undefined");
             } else if (r === null) {
-                console.log("undefined");
+                console.log("null");
             } else {
                 let createAt = firebase.Timestamp.now();
                 let newU = {
@@ -63,8 +63,7 @@ export class LoginComponent implements OnInit {
                     imgPath: ''
                 };
                 this.loginService.addConnectedUser(newU, r?.user.uid).then(() => {
-                    console.log("User created");
-                    // display the config profile after the register for forced the user
+                    // display the config profile after the register for forced the user to configure his profile
                     this.swalConfigProfile?.displaySwal();
                 });
             }

@@ -2,7 +2,7 @@
     <nav>
         <div> <img src="assets/default-img/rj-icon.png" class="mat-icon-button" [routerLink]="'news'"> </div>
         <div class="seach">
-            <input type="search" (ngModelChange)="dynamicSearch()" name="#" id="#" [formControl]="searchInputCtrl" placeholder="Recherche un utilisateur">
+            <input type="search" (ngModelChange)="dynamicSearch()" name="#" id="#" [formControl]="searchInputCtrl" placeholder="Recherche un utilisateur par pseudo">
             <div *ngIf="usersFind$ | async as usersList" class="itemContainerContent searchResultContainer">
                 <div *ngFor="let user of usersList" class="clickableContainer">
                     <mat-card class="mat-card-customize"
@@ -26,7 +26,7 @@
         <ol>
             <li><a class="bi bi-house" [routerLink]="'news'"></a> </li>
             <li><a class="bi bi-chat" [routerLink]="'chats'"></a></li>
-            <li><a class="bi bi-person" [routerLink]="'user/'+ currentUser?.id"></a></li>
+            <li><a class="bi bi-person" *ngIf="currentUser | async as cU" [routerLink]="'user/'+ cU.id"></a></li>
             <li><a class="bi bi-power powerIcon rounded" (click)="logout()"></a></li>
         </ol>
     </nav>
