@@ -70,6 +70,7 @@ export class NavbarComponent implements OnInit, OnChanges {
   }
 
   getCurrentUser() {
-    return '' + this.currentUser?.id;
+    console.log(this.auth.userInfo);
+    this.route.navigate(['user/' + this.auth?.userInfo?.id]) ;
   }
 }
